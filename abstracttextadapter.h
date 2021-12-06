@@ -35,13 +35,6 @@ public:
 
     void save(const QString & newFilename ) const;
 
-    void replaceOutput( const Form & replaceThis, const Form & withThis );
-    void searchAndReplace( const Form & replaceThis, const Form & withThis );
-    void selectOutputParsing(const Form & f, const Parsing & p , const WritingSystem &summaryWs);
-
-    void reparseOutputs(const WritingSystem & summaryWs);
-    void setGrammaticalityForOutputs(bool ungrammaticalOnly = false);
-
     void foreachTextItem(std::function<void(AbstractTextItem*)> funct);
 
     void dumpToDebug() const;
