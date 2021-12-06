@@ -80,3 +80,11 @@ QString AbstractTextSegment::summary() const
 
     return dbgString;
 }
+
+void AbstractTextSegment::foreachTextItem(std::function<void(AbstractTextItem*)> funct)
+{
+    for(int i=0; i<count(); i++)
+    {
+        funct( item(i) );
+    }
+}

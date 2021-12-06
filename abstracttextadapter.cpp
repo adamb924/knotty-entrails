@@ -179,3 +179,11 @@ void AbstractTextAdapter::dumpToDebug() const
         }
     }
 }
+
+void AbstractTextAdapter::foreachTextItem(std::function<void(AbstractTextItem*)> funct)
+{
+    for(int i=0; i<count(); i++)
+    {
+        segment(i)->foreachTextItem(funct);
+    }
+}

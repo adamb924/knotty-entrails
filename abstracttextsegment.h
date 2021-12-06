@@ -27,6 +27,8 @@ public:
 
     QString summary() const;
 
+    void foreachTextItem(std::function<void(AbstractTextItem*)> funct);
+
 private:
     virtual void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) = 0;
 };

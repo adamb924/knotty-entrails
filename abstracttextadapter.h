@@ -9,9 +9,11 @@ class Form;
 class Morphology;
 class Parsing;
 class WritingSystem;
+class AbstractTextItem;
 
 #include <QObject>
 #include <QString>
+#include <functional>
 
 #include "knotty-entrails_global.h"
 
@@ -39,6 +41,8 @@ public:
 
     void reparseOutputs(const WritingSystem & summaryWs);
     void setGrammaticalityForOutputs(bool ungrammaticalOnly = false);
+
+    void foreachTextItem(std::function<void(AbstractTextItem*)> funct);
 
     void dumpToDebug() const;
 
