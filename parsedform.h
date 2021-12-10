@@ -10,7 +10,7 @@ class KNOTTYENTRAILS_EXPORT ParsedForm : public AbstractParsedForm
 public:
     ParsedForm();
     explicit ParsedForm(const Form & form);
-    ParsedForm(const Parsing & parsing, const WritingSystem &summaryWs);
+    ParsedForm(const Parsing & parsing);
     ~ParsedForm();
 
     Form form() const;
@@ -26,14 +26,12 @@ public:
     void setSource(const QString & source);
 
     Parsing parsing();
-    void setParsing(const Parsing & p, const WritingSystem & summaryWs);
+    void setParsing(const Parsing & p);
 
-    QString parsingSummary() const;
     QString parsingIdentifier() const;
 
 protected:
     void setParsingIdentifier(const QString & identifier);
-    void setParsingSummary(const QString & summary);
 
 private:
     Form mForm;
@@ -41,7 +39,6 @@ private:
     AbstractTextItem::WellformednessStatus mWellFormedness;
     QString mSource;
     Parsing mSelectedParsing;
-    QString mParsingSummary;
     QString mParsingIdentifier;
 };
 

@@ -26,9 +26,8 @@ public:
     void setSource(const QString & source);
 
     Parsing parsing();
-    void setParsing(const Parsing & p, const WritingSystem & summaryWs);
+    void setParsing(const Parsing & p);
 
-    QString parsingSummary() const;
     QString parsingIdentifier() const;
 
     /// XML Names
@@ -44,7 +43,6 @@ public:
 
 protected:
     void setParsingIdentifier(const QString & identifier);
-    void setParsingSummary(const QString & summary);
 
 private:
     void ensureElementExists(QDomElement &element, const QString & elementName);

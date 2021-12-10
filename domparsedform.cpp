@@ -117,7 +117,7 @@ Parsing DomParsedForm::parsing()
     }
 }
 
-void DomParsedForm::setParsing(const Parsing &p, const WritingSystem &summaryWs)
+void DomParsedForm::setParsing(const Parsing &p)
 {
     mCachedParsing = p;
 
@@ -135,12 +135,6 @@ void DomParsedForm::setParsing(const Parsing &p, const WritingSystem &summaryWs)
     setWellformedness( AbstractTextItem::WellformedUnknown );
     /// set the parsing identifier
     setParsingIdentifier( p.labelSummary() );
-    setParsingSummary( p.interlinearStyleSummary(summaryWs) );
-}
-
-QString DomParsedForm::parsingSummary() const
-{
-    return mParsedFormElement.attribute(XML_PARSING_SUMMARY);
 }
 
 QString DomParsedForm::parsingIdentifier() const
@@ -151,11 +145,6 @@ QString DomParsedForm::parsingIdentifier() const
 void DomParsedForm::setParsingIdentifier(const QString &identifier)
 {
     mParsedFormElement.setAttribute(XML_PARSING_IDENTIFIER, identifier);
-}
-
-void DomParsedForm::setParsingSummary(const QString &summary)
-{
-    mParsedFormElement.setAttribute(XML_PARSING_SUMMARY, summary);
 }
 
 void DomParsedForm::ensureElementExists(QDomElement &element, const QString &elementName)

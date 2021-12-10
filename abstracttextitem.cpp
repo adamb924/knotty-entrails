@@ -60,12 +60,12 @@ void AbstractTextItem::setWellformedness(WellformednessStatus wellformedness, Ab
         output().setWellformedness(wellformedness);
 }
 
-void AbstractTextItem::setParsing(const Parsing &p, const WritingSystem &summaryWs, AbstractTextItem::ParseBy parseBy)
+void AbstractTextItem::setParsing(const Parsing &p, AbstractTextItem::ParseBy parseBy)
 {
     if( parseBy == AbstractTextItem::ParseInputs )
-        input().setParsing(p, summaryWs);
+        input().setParsing(p);
     else if ( parseBy == AbstractTextItem::ParseOutputs )
-        output().setParsing(p, summaryWs);
+        output().setParsing(p);
 }
 
 QString AbstractTextItem::typeToString(AbstractTextItem::Type type)

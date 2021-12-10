@@ -9,10 +9,10 @@ ParsedForm::ParsedForm(const Form &form) : mForm(form)
 {
 }
 
-ParsedForm::ParsedForm(const Parsing &parsing, const WritingSystem &summaryWs) : mForm(parsing.form())
+ParsedForm::ParsedForm(const Parsing &parsing) : mForm(parsing.form())
 {
     /// setParsing does a lot of other things
-    setParsing( parsing, summaryWs );
+    setParsing( parsing );
 }
 
 ParsedForm::~ParsedForm()
@@ -65,7 +65,7 @@ Parsing ParsedForm::parsing()
     return mSelectedParsing;
 }
 
-void ParsedForm::setParsing(const Parsing &p, const WritingSystem &summaryWs)
+void ParsedForm::setParsing(const Parsing &p)
 {
     mSelectedParsing = p;
     if( ! p.isNull() )
@@ -75,12 +75,6 @@ void ParsedForm::setParsing(const Parsing &p, const WritingSystem &summaryWs)
 
     /// set the parsing identifier
     setParsingIdentifier( p.labelSummary() );
-    setParsingSummary( p.interlinearStyleSummary(summaryWs) );
-}
-
-QString ParsedForm::parsingSummary() const
-{
-    return mParsingSummary;
 }
 
 QString ParsedForm::parsingIdentifier() const
@@ -91,9 +85,4 @@ QString ParsedForm::parsingIdentifier() const
 void ParsedForm::setParsingIdentifier(const QString &identifier)
 {
     mParsingIdentifier = identifier;
-}
-
-void ParsedForm::setParsingSummary(const QString &summary)
-{
-    mParsingSummary = summary;
 }

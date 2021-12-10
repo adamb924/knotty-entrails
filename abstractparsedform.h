@@ -25,14 +25,12 @@ public:
     virtual void setSource(const QString & source) = 0;
 
     virtual Parsing parsing() = 0;
-    virtual void setParsing(const Parsing & p, const WritingSystem & summaryWs) = 0;
+    virtual void setParsing(const Parsing & p) = 0;
 
-    virtual QString parsingSummary() const = 0;
     virtual QString parsingIdentifier() const = 0;
 
 protected:
     virtual void setParsingIdentifier(const QString & identifier) = 0;
-    virtual void setParsingSummary(const QString & summary) = 0;
 
 public:
     QString summary();

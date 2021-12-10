@@ -35,7 +35,7 @@ public:
 
     /// convenience methods
     void setWellformedness(WellformednessStatus wellformedness, ParseBy parseBy);
-    void setParsing(const Parsing & p, const WritingSystem & summaryWs, ParseBy parseBy);
+    void setParsing(const Parsing & p, ParseBy parseBy);
 
     virtual bool modifiable() const = 0;
     virtual void setModifiable(bool modifiable) = 0;
