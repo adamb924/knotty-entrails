@@ -1,5 +1,7 @@
 #include "parsedform.h"
 
+#include "morphology.h"
+
 ParsedForm::ParsedForm()
 {
 
@@ -25,9 +27,19 @@ Form ParsedForm::form() const
     return mForm;
 }
 
-void ParsedForm::setForm(const Form &form)
+void ParsedForm::setForm(const Form &form, const Morphology *morphology)
 {
     mForm = form;
+
+    if( morphology != nullptr )
+    {
+        const QList<Parsing> ps = morphology->possibleParsings( form );
+        AbstractParsedForm::setWellformedness( ps.count() );
+        if( ps.count() > 0 )
+        {
+            setParsing(ps.first());
+        }
+    }
 }
 
 AbstractTextItem::WellformednessStatus ParsedForm::wellformedness() const

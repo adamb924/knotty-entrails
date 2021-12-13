@@ -40,7 +40,7 @@ Form DomParsedForm::form() const
     return Form( ws, mFormElement.text(), id );
 }
 
-void DomParsedForm::setForm(const Form &form)
+void DomParsedForm::setForm(const Form &form, const Morphology *morphology)
 {
     ensureElementExists( mFormElement, XML_FORM );
     Q_ASSERT( !mFormElement.isNull() );
@@ -55,6 +55,16 @@ void DomParsedForm::setForm(const Form &form)
     else
     {
         mFormElement.replaceChild( newNode, mFormElement.firstChild() );
+    }
+
+    if( morphology != nullptr )
+    {
+        const QList<Parsing> ps = morphology->possibleParsings( form );
+        AbstractParsedForm::setWellformedness( ps.count() );
+        if( ps.count() > 0 )
+        {
+            setParsing(ps.first());
+        }
     }
 }
 

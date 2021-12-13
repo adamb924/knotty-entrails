@@ -14,7 +14,7 @@ public:
     ~ParsedForm();
 
     Form form() const;
-    void setForm( const Form & form );
+    void setForm( const Form & form, const Morphology *morphology );
 
     AbstractTextItem::WellformednessStatus wellformedness() const;
     void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness);
