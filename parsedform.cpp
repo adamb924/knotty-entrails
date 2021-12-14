@@ -27,19 +27,9 @@ Form ParsedForm::form() const
     return mForm;
 }
 
-void ParsedForm::setForm(const Form &form, const Morphology *morphology)
+void ParsedForm::setForm(const Form &form)
 {
     mForm = form;
-
-    if( morphology != nullptr )
-    {
-        const QList<Parsing> ps = morphology->possibleParsings( form );
-        AbstractParsedForm::setWellformedness( ps.count() );
-        if( ps.count() > 0 )
-        {
-            setParsing(ps.first());
-        }
-    }
 }
 
 AbstractTextItem::WellformednessStatus ParsedForm::wellformedness() const

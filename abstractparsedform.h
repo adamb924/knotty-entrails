@@ -14,7 +14,8 @@ public:
     /// Virtual Data Access Methods
     virtual Form form() const = 0;
     /// if \a morphology is not equal to nullptr, the parsing and wellformedness are set using \a morphology
-    virtual void setForm( const Form & form, const Morphology * morphology = nullptr ) = 0;
+    virtual void setForm( const Form & form ) = 0;
+    void setForm( const Form & form, const Morphology * morphology );
 
     virtual AbstractTextItem::WellformednessStatus wellformedness() const = 0;
     virtual void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness) = 0;
@@ -27,6 +28,7 @@ public:
 
     virtual Parsing parsing() = 0;
     virtual void setParsing(const Parsing & p) = 0;
+    void setParsing(const Morphology * morphology);
 
     virtual QString parsingIdentifier() const = 0;
 

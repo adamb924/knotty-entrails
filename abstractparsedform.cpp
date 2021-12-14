@@ -15,6 +15,30 @@ AbstractParsedForm::~AbstractParsedForm()
 
 }
 
+void AbstractParsedForm::setForm(const Form &form, const Morphology *morphology)
+{
+    Q_ASSERT(morphology != nullptr);
+
+    setForm(form);
+
+    const QList<Parsing> ps = morphology->possibleParsings( form );
+    setWellformedness( ps.count() );
+    if( ps.count() > 0 )
+    {
+        setParsing(ps.first());
+    }
+}
+
+void AbstractParsedForm::setParsing(const Morphology *morphology)
+{
+    const QList<Parsing> ps = morphology->possibleParsings( form() );
+    setWellformedness(ps.count());
+    if( ! ps.isEmpty() )
+    {
+        setParsing( ps.first() );
+    }
+}
+
 QString AbstractParsedForm::summary()
 {
     QString dbgString;
