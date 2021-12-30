@@ -8,28 +8,36 @@ CONFIG += c++11
 
 SOURCES += \
     abstractparsedform.cpp \
+    abstractparserlog.cpp \
     abstracttextadapter.cpp \
     abstracttextitem.cpp \
+    abstracttextparser.cpp \
     abstracttextsegment.cpp \
     domparsedform.cpp \
     domtextitem.cpp \
     domtextsegment.cpp \
     parsedform.cpp \
+    simpleparserlog.cpp \
     simpletextadapter.cpp \
+    simpletextparser.cpp \
     textitem.cpp \
     textsegment.cpp
 
 HEADERS += \
     abstractparsedform.h \
+    abstractparserlog.h \
     abstracttextadapter.h \
     abstracttextitem.h \
+    abstracttextparser.h \
     abstracttextsegment.h \
     domparsedform.h \
     domtextitem.h \
     domtextsegment.h \
     knotty-entrails_global.h \
     parsedform.h \
+    simpleparserlog.h \
     simpletextadapter.h \
+    simpletextparser.h \
     textitem.h \
     textsegment.h
 
