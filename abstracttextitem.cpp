@@ -52,22 +52,6 @@ QDomElement AbstractTextItem::toElement(QDomDocument * document)
     return document->importNode( xmlDoc.firstChild().toElement(), true ).toElement();
 }
 
-void AbstractTextItem::setWellformedness(WellformednessStatus wellformedness, AbstractTextItem::ParseBy parseBy)
-{
-    if( parseBy == AbstractTextItem::ParseInputs )
-        input().setWellformedness(wellformedness);
-    else if ( parseBy == AbstractTextItem::ParseOutputs )
-        output().setWellformedness(wellformedness);
-}
-
-void AbstractTextItem::setParsing(const Parsing &p, AbstractTextItem::ParseBy parseBy)
-{
-    if( parseBy == AbstractTextItem::ParseInputs )
-        input().setParsing(p);
-    else if ( parseBy == AbstractTextItem::ParseOutputs )
-        output().setParsing(p);
-}
-
 QString AbstractTextItem::typeToString(AbstractTextItem::Type type)
 {
     switch( type )

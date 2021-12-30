@@ -16,7 +16,6 @@ class KNOTTYENTRAILS_EXPORT AbstractTextItem
 public:
     enum Type { Null, Simple, Translated };
     enum WellformednessStatus { Untested, WellformedSingle, WellformedMultiple, WellformedUnknown, NotWellformed, Ignored };
-    enum ParseBy { ParseInputs, ParseOutputs };
 
     AbstractTextItem();
     virtual ~AbstractTextItem();
@@ -32,10 +31,6 @@ public:
     virtual AbstractParsedForm &output() = 0;
     virtual const AbstractParsedForm &input() const = 0;
     virtual const AbstractParsedForm &output() const = 0;
-
-    /// convenience methods
-    void setWellformedness(WellformednessStatus wellformedness, ParseBy parseBy);
-    void setParsing(const Parsing & p, ParseBy parseBy);
 
     virtual bool modifiable() const = 0;
     virtual void setModifiable(bool modifiable) = 0;
