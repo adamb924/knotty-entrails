@@ -47,13 +47,6 @@ public:
     void serialize(const QString & elementName, QXmlStreamWriter & out);
     QDomElement toElement(const QString &elementName, QDomDocument *document);
 
-    /// these functions provide a place to store a list of parsings,
-    /// but the data is not guaranteed to persist. in particular it
-    /// is not required to be stored (and is not stored in DomTextItem)
-    QList<Parsing> inMemoryParsings();
-    bool hasInMemoryParsings() const;
-    void setInMemoryParsings( const QList<Parsing> & parsings );
-
 protected:
     /// This is a transient data type. DomTextItem will not store it in the DOM
     /// for instance. It makes sense to be able to read it for efficiency purposes,

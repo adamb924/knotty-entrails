@@ -10,9 +10,9 @@ class ParserLog;
 class KNOTTYENTRAILS_EXPORT SimpleTextParser : public AbstractTextParser
 {
 public:
-    SimpleTextParser(const Morphology *morphology);
+    explicit SimpleTextParser(const Morphology *morphology);
 
-    void parseText( AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const;
+    void parseText( AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const override;
 
 private:
     const Morphology * mMorphology;

@@ -11,24 +11,24 @@ class KNOTTYENTRAILS_EXPORT DomParsedForm : public AbstractParsedForm
 {
 public:
     DomParsedForm(const QDomElement & textItem, const Morphology * morphology);
-    ~DomParsedForm();
+    ~DomParsedForm() override;
 
-    Form form() const;
-    void setForm(const Form & form);
+    Form form() const override;
+    void setForm(const Form & form) override;
 
-    AbstractTextItem::WellformednessStatus wellformedness() const;
-    void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness);
+    AbstractTextItem::WellformednessStatus wellformedness() const override;
+    void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness) override;
 
-    QString glossaryKey() const;
-    void setGlossaryKey(const QString &glossaryKey);
+    QString glossaryKey() const override;
+    void setGlossaryKey(const QString &glossaryKey) override;
 
-    QString source() const;
-    void setSource(const QString & source);
+    QString source() const override;
+    void setSource(const QString & source) override;
 
-    Parsing parsing();
-    void setParsing(const Parsing & p);
+    Parsing parsing() override;
+    void setParsing(const Parsing & p) override;
 
-    QString parsingIdentifier() const;
+    QString parsingIdentifier() const override;
 
     /// XML Names
     static QString XML_ID;
@@ -42,7 +42,7 @@ public:
     static QString XML_GLOSSARY;
 
 protected:
-    void setParsingIdentifier(const QString & identifier);
+    void setParsingIdentifier(const QString & identifier) override;
 
 private:
     void ensureElementExists(QDomElement &element, const QString & elementName);

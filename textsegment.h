@@ -10,17 +10,17 @@ class KNOTTYENTRAILS_EXPORT TextSegment : public AbstractTextSegment
 {
 public:
     TextSegment();
-    TextSegment(const Form & string);
-    ~TextSegment();
+    explicit TextSegment(const Form & string);
+    ~TextSegment() override;
 
-    AbstractTextItem *item(int n) const;
+    AbstractTextItem *item(int n) const override;
 
-    int count() const;
+    int count() const override;
 
-    void addItem( AbstractTextItem * item );
+    void addItem( AbstractTextItem * item ) override;
 
 private:
-    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement);
+    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) override;
 
     QList<AbstractTextItem*> mItems;
 };

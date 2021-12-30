@@ -2,19 +2,19 @@
 
 #include "morphology.h"
 
-ParsedForm::ParsedForm()
+ParsedForm::ParsedForm() : mWellFormedness(AbstractTextItem::Untested)
 {
 
 }
 
-ParsedForm::ParsedForm(const Form &form) : mForm(form)
+ParsedForm::ParsedForm(const Form &form) : mForm(form), mWellFormedness(AbstractTextItem::Untested)
 {
 }
 
-ParsedForm::ParsedForm(const Parsing &parsing) : mForm(parsing.form())
+ParsedForm::ParsedForm(const Parsing &parsing) : mForm(parsing.form()), mWellFormedness(AbstractTextItem::Untested)
 {
     /// setParsing does a lot of other things
-    setParsing( parsing );
+    ParsedForm::setParsing( parsing );
 }
 
 ParsedForm::~ParsedForm()

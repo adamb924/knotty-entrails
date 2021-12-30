@@ -101,19 +101,3 @@ QDomElement AbstractParsedForm::toElement(const QString &elementName, QDomDocume
     xmlDoc.setContent(serialized);
     return document->importNode( xmlDoc.firstChild().toElement(), true ).toElement();
 }
-
-QList<Parsing> AbstractParsedForm::inMemoryParsings()
-{
-    return mParsings;
-}
-
-bool AbstractParsedForm::hasInMemoryParsings() const
-{
-    return mParsings.count() > 0;
-}
-
-void AbstractParsedForm::setInMemoryParsings(const QList<Parsing> &parsings)
-{
-    mParsings = parsings;
-    setWellformedness( AbstractTextItem::wellformednessStatusFromNumberOfParsings( mParsings.count() ) );
-}

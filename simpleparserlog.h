@@ -10,9 +10,9 @@ class KNOTTYENTRAILS_EXPORT SimpleParserLog : public AbstractParserLog
 public:
     SimpleParserLog();
 
-    void addAmbiguousParsing(const QList<Parsing> & parsings);
+    void addAmbiguousParsing(const QList<Parsing> & parsings) override;
 
-    void printReport(const WritingSystem & ws) const;
+    void printReport(const WritingSystem & ws) const override;
 
 private:
     QSet<QList<Parsing>> mAmbiguousParsings;

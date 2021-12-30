@@ -10,16 +10,16 @@ class KNOTTYENTRAILS_EXPORT DomTextSegment : public AbstractTextSegment
 {
 public:
     DomTextSegment(QDomDocument *document, const Morphology *morphology);
-    ~DomTextSegment();
+    ~DomTextSegment() override;
 
-    AbstractTextItem *item(int n) const;
+    AbstractTextItem *item(int n) const override;
 
-    int count() const;
+    int count() const override;
 
-    void addItem( AbstractTextItem * item );
+    void addItem( AbstractTextItem * item ) override;
 
 private:
-    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement);
+    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) override;
 
     QDomDocument *mDocument;
     const Morphology *mMorphology;

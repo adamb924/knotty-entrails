@@ -9,8 +9,8 @@
 class KNOTTYENTRAILS_EXPORT TextItem : public AbstractTextItem
 {
 public:
-    TextItem(Type type = TextItem::Simple );
-    TextItem(const Form & output, Type type = TextItem::Simple );
+    explicit TextItem(Type type = TextItem::Simple );
+    explicit TextItem(const Form & output, Type type = TextItem::Simple );
     ~TextItem() override;
 
     AbstractParsedForm &input() override;
@@ -29,7 +29,6 @@ protected:
     ParsedForm mOutput;
     QString mGlossaryKey;
     Type mType;
-    WellformednessStatus mOutputWellFormedness, mInputWellFormedness;
     bool mModifiable;
     QString mSource;
     Parsing mSelectedParsing;

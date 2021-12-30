@@ -12,14 +12,15 @@
 #include "abstractparsedform.h"
 #include "textsegment.h"
 
-AbstractTextAdapter::AbstractTextAdapter(const Morphology *morphology) : mMorphology(morphology)
+AbstractTextAdapter::AbstractTextAdapter(const Morphology *morphology) : mDomDocument(nullptr), mMorphology(morphology)
 {
 
 }
 
 AbstractTextAdapter::~AbstractTextAdapter()
 {
-    delete  mDomDocument;
+    if( mDomDocument != nullptr )
+        delete  mDomDocument;
 }
 
 QDomDocument *AbstractTextAdapter::domDocument() const

@@ -17,12 +17,12 @@ class KNOTTYENTRAILS_EXPORT SimpleTextAdapter : public AbstractTextAdapter
 public:
     SimpleTextAdapter(const QString & filename, const Morphology * morphology);
     SimpleTextAdapter(QDomElement element, const Morphology * morphology);
-    ~SimpleTextAdapter();
+    ~SimpleTextAdapter() override;
 
-    int count() const;
+    int count() const override;
 
-    AbstractTextSegment *segment(int n);
-    const AbstractTextSegment *segment(int n) const;
+    AbstractTextSegment *segment(int n) override;
+    const AbstractTextSegment *segment(int n) const override;
 
     QString filename() const;
 
