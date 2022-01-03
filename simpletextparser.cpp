@@ -15,6 +15,8 @@ void SimpleTextParser::parseText(AbstractTextAdapter *text, WhichForm which, Abs
     text->foreachTextItem( [this,which,log](AbstractTextItem * item) {
         /// get possible parsings
         QList<Parsing> ps = mMorphology->possibleParsings( mNormalizationFunction( (*(item).*which)().form() ) );
+        /// set the wellformedness
+        (*(item).*which)().setWellformedness( ps.count() );
         /// if a parsing is available, use it
         if( ps.count() > 0 )
         {
