@@ -35,6 +35,14 @@ void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QLi
     {
         DomTextItem * item = dynamic_cast<DomTextItem *>( mTextItems.at(i) );
         QDomNode node = item->element();
+        /// look for a <whitespace> element preceding the node we're going to remove
+        QDomNode whitespaceElement = node.previousSiblingElement("whitespace");
+        /// remove the whitespace element if it exists
+        if( !whitespaceElement.isNull() )
+        {
+            node.parentNode().removeChild( whitespaceElement );
+        }
+        /// remove the node itself
         node.parentNode().removeChild( node );
         mTextItems.removeOne( item );
     }
