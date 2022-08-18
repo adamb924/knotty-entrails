@@ -31,6 +31,7 @@ public:
     virtual AbstractTextSegment *segment(int n) = 0;
     virtual const AbstractTextSegment *segment(int n) const = 0;
 
+    /// TODO this probably doesn't need to be a pointer (e.g., QDomNode::ownerDocument() doesn't need to return a pointer)
     QDomDocument *domDocument() const;
 
     void save(const QString & newFilename ) const;
