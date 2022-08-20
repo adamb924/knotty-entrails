@@ -13,6 +13,7 @@ SOURCES += \
     abstracttextitem.cpp \
     abstracttextparser.cpp \
     abstracttextsegment.cpp \
+    documenttokenizer.cpp \
     domparsedform.cpp \
     domtextitem.cpp \
     domtextsegment.cpp \
@@ -21,7 +22,9 @@ SOURCES += \
     simpletextadapter.cpp \
     simpletextparser.cpp \
     textitem.cpp \
-    textsegment.cpp
+    textsegment.cpp \
+    xmldocumentmodel.cpp \
+    xmldocumentmodellevel.cpp
 
 HEADERS += \
     abstractparsedform.h \
@@ -30,6 +33,7 @@ HEADERS += \
     abstracttextitem.h \
     abstracttextparser.h \
     abstracttextsegment.h \
+    documenttokenizer.h \
     domparsedform.h \
     domtextitem.h \
     domtextsegment.h \
@@ -39,7 +43,9 @@ HEADERS += \
     simpletextadapter.h \
     simpletextparser.h \
     textitem.h \
-    textsegment.h
+    textsegment.h \
+    xmldocumentmodel.h \
+    xmldocumentmodellevel.h
 
 # Default rules for deployment.
 unix {
