@@ -2,6 +2,8 @@
 
 #include <QtDebug>
 
+#include "xmldocumentposition.h"
+
 QString XmlDocumentModelLevel::XML_DOCUMENT_MODEL = "document-model";
 QString XmlDocumentModelLevel::XML_DOCUMENT_LEVEL = "level";
 
@@ -53,15 +55,15 @@ void XmlDocumentModelLevel::setContainsText(bool containsText)
 
 void XmlDocumentModelLevel::addChild(XmlDocumentModelLevel child)
 {
-    mChildren << child;
+    mModelChildren << child;
 }
 
 const XmlDocumentModelLevel *XmlDocumentModelLevel::matchingChildElement(QXmlStreamReader &in) const
 {
-    for(int i=0; i<mChildren.count(); i++)
+    for(int i=0; i<mModelChildren.count(); i++)
     {
-        if( mChildren.at(i).elementNames().contains( in.name() ) )
-            return &mChildren.at(i);
+        if( mModelChildren.at(i).elementNames().contains( in.name() ) )
+            return &mModelChildren.at(i);
     }
     return nullptr;
 }
@@ -74,16 +76,31 @@ QString XmlDocumentModelLevel::summary() const
     if( mContainsText )
         str += "; contains text";
     str += ")";
-    if( mChildren.count() > 0 )
+    if( mModelChildren.count() > 0 )
     {
         str += " { ";
-        for(int i=0; i<mChildren.count(); i++)
+        for(int i=0; i<mModelChildren.count(); i++)
         {
-            str += mChildren.at(i).summary();
+            str += mModelChildren.at(i).summary();
         }
         str += " }";
     }
     return str;
+}
+
+QString XmlDocumentModelLevel::label(QDomElement node) const
+{
+    return node.attribute( mLabelFrom );
+}
+
+bool XmlDocumentModelLevel::matchesElementName(const QString &elementName) const
+{
+    return mElementNames.contains( elementName );
+}
+
+bool XmlDocumentModelLevel::matchesElementName(QDomNode node) const
+{
+    return mElementNames.contains( node.localName() );
 }
 
 XmlDocumentModelLevel XmlDocumentModelLevel::readFromXml(QXmlStreamReader &in)
@@ -110,15 +127,24 @@ XmlDocumentModelLevel XmlDocumentModelLevel::readFromXml(QXmlStreamReader &in)
     return model;
 }
 
-QList<QDomNode> XmlDocumentModelLevel::matchingChildren(QDomNode parent) const
+QList<XmlDocumentPosition> XmlDocumentModelLevel::matchingChildren(QDomElement parent) const
 {
-    QList<QDomNode> list;
+    QList<XmlDocumentPosition> list;
 
-    QDomNodeList allChildren = parent.childNodes();
-    for(int i=0; i<allChildren.count(); i++)
+    QDomNodeList children = parent.childNodes();
+
+    for(int i=0; i<children.count(); i++)
     {
-        if( allChildren.at(i).isElement() && mElementNames.contains( allChildren.at(i).nodeName() ) )
-            list << allChildren.at(i);
+        if( children.at(i).isElement() )
+        {
+            for(int j=0; j<mModelChildren.count(); j++)
+            {
+                if( mModelChildren.at(j).matchesElementName( children.at(i) ) )
+                {
+                    list << XmlDocumentPosition( &mModelChildren[j], children.at(i).toElement() );
+                }
+            }
+        }
     }
 
     return list;
@@ -157,17 +183,34 @@ QString XmlDocumentModelLevel::typeToString(Type t)
     return "";
 }
 
-const QString &XmlDocumentModelLevel::labelFrom() const
-{
-    return mLabelFrom;
-}
-
 void XmlDocumentModelLevel::setLabelFrom(const QString &newLabelFrom)
 {
     mLabelFrom = newLabelFrom;
 }
 
-const QList<XmlDocumentModelLevel> &XmlDocumentModelLevel::children() const
+QList<XmlDocumentPosition> XmlDocumentModelLevel::elementsAtLevel(QDomElement parent, Type type) const
 {
-    return mChildren;
+    QList<XmlDocumentPosition> returnList;
+
+    QList<XmlDocumentPosition> children = matchingChildren(parent);
+    if( children.isEmpty() ) return returnList;
+    for(int i=0; i<children.count(); i++)
+    {
+        if( children.at(i).level()->type() == type )
+        {
+            returnList << children.at(i);
+        }
+    }
+    if( ! returnList.isEmpty() )
+    {
+        return returnList;
+    }
+    else
+    {
+        for(int i=0; i<children.count(); i++)
+        {
+            returnList << children.at(i).level()->elementsAtLevel( children.at(i).node(), type );
+        }
+    }
+    return returnList;
 }

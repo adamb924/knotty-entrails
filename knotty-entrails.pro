@@ -24,7 +24,8 @@ SOURCES += \
     textitem.cpp \
     textsegment.cpp \
     xmldocumentmodel.cpp \
-    xmldocumentmodellevel.cpp
+    xmldocumentmodellevel.cpp \
+    xmldocumentposition.cpp
 
 HEADERS += \
     abstractparsedform.h \
@@ -45,7 +46,8 @@ HEADERS += \
     textitem.h \
     textsegment.h \
     xmldocumentmodel.h \
-    xmldocumentmodellevel.h
+    xmldocumentmodellevel.h \
+    xmldocumentposition.h
 
 # Default rules for deployment.
 unix {

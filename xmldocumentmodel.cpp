@@ -69,21 +69,36 @@ const XmlDocumentModelLevel &XmlDocumentModel::root() const
     return mRoot;
 }
 
-QList<QDomNode> XmlDocumentModel::getRootDivisions(QDomDocument document)
+XmlDocumentPosition XmlDocumentModel::getRootPosition(QDomDocument document) const
 {
-    return mRoot.matchingChildren( document );
-}
-
-QList<QDomNode> XmlDocumentModel::getMajorDivisions(QDomDocument document)
-{
-    QList<QDomNode> majorDivisions;
-    QList<QDomNode> roots = getRootDivisions(document);
-    for(int i=0; i<roots.length(); i++)
+    QList<XmlDocumentPosition> positions;
+    for(int i=0; i< mRoot.elementNames().count(); i++)
     {
-        for(int j=0; j<mRoot.children().count(); j++)
+        QDomNodeList nodes = document.elementsByTagName( mRoot.elementNames().at(i) );
+        for(int j=0; j<nodes.count(); j++)
         {
-            majorDivisions.append( mRoot.children().at(j).matchingChildren( roots.at(i) ) );
+            positions << XmlDocumentPosition( &mRoot, nodes.at(j).toElement() );
         }
     }
-    return majorDivisions;
+    if( positions.length() == 0 )
+    {
+        qWarning() << "No root element found. (XmlDocumentModel::getRootPosition)";
+        return XmlDocumentPosition(&mRoot, QDomNode().toElement() );
+    }
+    else if( positions.length() > 1 )
+    {
+        qWarning() << "Multiple root elements found. Arbitrarily taking the first. (XmlDocumentModel::getRootPosition)";
+    }
+    return positions.first();
+}
+
+QList<XmlDocumentPosition> XmlDocumentModel::getMajorDivisions(QDomDocument document) const
+{
+    const XmlDocumentPosition rootPosition = getRootPosition(document);
+    return getMajorDivisions( rootPosition );
+}
+
+QList<XmlDocumentPosition> XmlDocumentModel::getMajorDivisions(XmlDocumentPosition root) const
+{
+    return mRoot.elementsAtLevel( root.node(), XmlDocumentModel::Major );
 }

@@ -7,6 +7,8 @@
 #include <QXmlStreamReader>
 #include <QDomNode>
 
+#include "xmldocumentposition.h"
+
 class KNOTTYENTRAILS_EXPORT XmlDocumentModelLevel
 {
 public:
@@ -30,9 +32,14 @@ public:
 
     QString summary() const;
 
+    QString label(QDomElement node) const;
+
+    bool matchesElementName(const QString & elementName) const;
+    bool matchesElementName(QDomNode node) const;
+
     static XmlDocumentModelLevel readFromXml(QXmlStreamReader & in);
 
-    QList<QDomNode> matchingChildren(QDomNode parent) const;
+    QList<XmlDocumentPosition> matchingChildren(QDomElement parent) const;
 
     static QString XML_DOCUMENT_MODEL;
     static QString XML_DOCUMENT_LEVEL;
@@ -45,16 +52,15 @@ public:
     static Type typeFromString(const QString & str);
     static QString typeToString(Type t);
 
-    const QString &labelFrom() const;
     void setLabelFrom(const QString &newLabelFrom);
 
-    const QList<XmlDocumentModelLevel> &children() const;
+    QList<XmlDocumentPosition> elementsAtLevel(QDomElement parent, Type type) const;
 
 private:
     QStringList mElementNames;
     Type mType;
     bool mContainsText;
-    QList<XmlDocumentModelLevel> mChildren;
+    QList<XmlDocumentModelLevel> mModelChildren;
     QString mLabelFrom;
 };
 

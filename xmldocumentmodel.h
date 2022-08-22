@@ -4,6 +4,7 @@
 #include "knotty-entrails_global.h"
 
 #include "xmldocumentmodellevel.h"
+#include "xmldocumentposition.h"
 
 #include <QStringList>
 #include <QXmlStreamReader>
@@ -23,8 +24,10 @@ public:
 
     const XmlDocumentModelLevel &root() const;
 
-    QList<QDomNode> getRootDivisions(QDomDocument document);
-    QList<QDomNode> getMajorDivisions(QDomDocument document);
+    XmlDocumentPosition getRootPosition(QDomDocument document) const;
+
+    QList<XmlDocumentPosition> getMajorDivisions(QDomDocument document) const;
+    QList<XmlDocumentPosition> getMajorDivisions(XmlDocumentPosition root) const;
 
 private:
     QString mLabel;
