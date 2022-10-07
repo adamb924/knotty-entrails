@@ -2,6 +2,7 @@
 
 #include <QFile>
 #include <QtDebug>
+#include <stdexcept>
 
 XmlDocumentModel::XmlDocumentModel()
 {
