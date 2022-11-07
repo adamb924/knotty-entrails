@@ -6,6 +6,11 @@ DEFINES += KNOTTYENTRAILS_LIBRARY
 
 CONFIG += c++11
 
+CONFIG(debug, debug|release) {
+    mac: TARGET = $$join(TARGET,,,_debug)
+    win32: TARGET = $$join(TARGET,,,d)
+}
+
 SOURCES += \
     abstractparsedform.cpp \
     abstractparserlog.cpp \
@@ -50,23 +55,14 @@ HEADERS += \
     xmldocumentposition.h
 
 # Default rules for deployment.
+win32:target.path = $$[QT_INSTALL_LIBS]
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
 
-
-win32-g++ {
-    win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MinGW_64_bit-Release/mortal-engine/release/ -lmortalengine
-    else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MinGW_64_bit-Debug/mortal-engine/debug/ -lmortalengine
-    else:unix: LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MinGW_64_bit/mortal-engine/ -lmortalengine
-}
-
-win32-msvc* {
-    win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MSVC2019_64bit-Release/mortal-engine/release/ -lmortalengine
-    else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MSVC2019_64bit-Debug/mortal-engine/debug/ -lmortalengine
-    else:unix: LIBS += -L$$OUT_PWD/../build-mortal-engine-Desktop_Qt_5_15_1_MSVC2019_64bit/mortal-engine/ -lmortalengine
-}
+CONFIG(release, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengine
+CONFIG(debug, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengined
 
 INCLUDEPATH += $$PWD/../mortal-engine/mortal-engine
 DEPENDPATH += $$PWD/../mortal-engine/mortal-engine
