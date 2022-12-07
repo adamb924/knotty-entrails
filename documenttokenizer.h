@@ -27,7 +27,7 @@ private:
     void readAndProcessChildren(const XmlDocumentModelLevel * currentLevel, QXmlStreamReader & in, QXmlStreamWriter & out) const;
 
     static QRegularExpression WHITESPACE_RE;
-    static QRegExp NONWORD_RE;
+    static QRegularExpression NONWORD_RE;
 
     XmlDocumentModel mDocumentModel;
     WritingSystem mInputWritingSystem;

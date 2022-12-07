@@ -10,7 +10,6 @@
 #include "abstracttextitem.h"
 #include "abstracttextsegment.h"
 #include "abstractparsedform.h"
-#include "textsegment.h"
 
 AbstractTextAdapter::AbstractTextAdapter(const Morphology *morphology) : mDomDocument(nullptr), mMorphology(morphology)
 {
@@ -34,7 +33,13 @@ void AbstractTextAdapter::save(const QString &newFilename) const
     if( file.open( QFile::WriteOnly ) )
     {
         QTextStream out(&file);
-        out.setCodec("UTF-8");
+
+        #if QT_VERSION >= 0x060000
+            out.setEncoding(QStringConverter::Utf8);
+        #else
+            out.setCodec("UTF-8");
+        #endif
+
         out << mDomDocument->toString();
         file.close();
     }

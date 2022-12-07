@@ -3,8 +3,6 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QXmlStreamReader>
-#include <QXmlInputSource>
-#include <QXmlSimpleReader>
 
 #include "domtextsegment.h"
 #include "domtextitem.h"
@@ -14,14 +12,10 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const Morphology *
     Q_ASSERT(mMorphology != nullptr);
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly))
-    {
-        QTextStream in(&file);
-        in.setCodec("UTF-8");
-        QXmlInputSource source;
-        source.setData(in.readAll());
-        QXmlSimpleReader reader;
+    {        
+        QXmlStreamReader xml(&file);
         mDomDocument = new QDomDocument;
-        mDomDocument->setContent(&source, &reader);
+        mDomDocument->setContent(&xml, false);
 
         mTheTextSegment = new DomTextSegment(mDomDocument, mMorphology);
 
