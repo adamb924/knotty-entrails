@@ -61,8 +61,14 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
-CONFIG(release, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengine
-CONFIG(debug, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengined
+win32 {
+    CONFIG(release, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengine
+    CONFIG(debug, debug|release): LIBS += -l$$[QT_INSTALL_LIBS]/mortalengined
+}
+
+unix: LIBS += -L/opt/ -lmortalengine
+
 
 INCLUDEPATH += $$PWD/../mortal-engine/mortal-engine
 DEPENDPATH += $$PWD/../mortal-engine/mortal-engine
+
