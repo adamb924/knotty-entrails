@@ -4,8 +4,8 @@
 
 #include "textitem.h"
 
-QRegularExpression DocumentTokenizer::WHITESPACE_RE("^\\s+$");
-QRegularExpression DocumentTokenizer::NONWORD_RE("\\b");
+QRegularExpression DocumentTokenizer::WHITESPACE_RE("^\\s+$", QRegularExpression::UseUnicodePropertiesOption);
+QRegularExpression DocumentTokenizer::NONWORD_RE("\\b", QRegularExpression::UseUnicodePropertiesOption);
 
 DocumentTokenizer::DocumentTokenizer(const XmlDocumentModel &documentModel, const WritingSystem &inputWritingSystem, const WritingSystem &outputWritingSystem, TextItem::Type mode, const QStringList &nonbreakingSequences)
     : mDocumentModel(documentModel),
