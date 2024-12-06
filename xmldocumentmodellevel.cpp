@@ -4,6 +4,8 @@
 
 #include "xmldocumentposition.h"
 
+using namespace KE;
+
 QString XmlDocumentModelLevel::XML_DOCUMENT_MODEL = "document-model";
 QString XmlDocumentModelLevel::XML_DOCUMENT_LEVEL = "level";
 

@@ -5,6 +5,8 @@
 
 #include "abstracttextitem.h"
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT AbstractParsedForm
 {
 public:
@@ -12,10 +14,10 @@ public:
     virtual ~AbstractParsedForm();
 
     /// Virtual Data Access Methods
-    virtual Form form() const = 0;
+    virtual ME::Form form() const = 0;
     /// if \a morphology is not equal to nullptr, the parsing and wellformedness are set using \a morphology
-    virtual void setForm( const Form & form ) = 0;
-    void setForm( const Form & form, const Morphology * morphology );
+    virtual void setForm( const ME::Form & form ) = 0;
+    void setForm( const ME::Form & form, const ME::Morphology * morphology );
 
     virtual AbstractTextItem::WellformednessStatus wellformedness() const = 0;
     virtual void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness) = 0;
@@ -26,9 +28,9 @@ public:
     virtual QString source() const = 0;
     virtual void setSource(const QString & source) = 0;
 
-    virtual Parsing parsing() = 0;
-    virtual void setParsing(const Parsing & p) = 0;
-    void setParsing(const Morphology * morphology);
+    virtual ME::Parsing parsing() = 0;
+    virtual void setParsing(const ME::Parsing & p) = 0;
+    void setParsing(const ME::Morphology * morphology);
 
     virtual QString parsingIdentifier() const = 0;
 
@@ -39,7 +41,7 @@ public:
     QString summary();
 
     /// Convenience methods
-    void setWellformednessFromMorphology(const Morphology * morphology);
+    void setWellformednessFromMorphology(const ME::Morphology * morphology);
     void setWellformedness(int numberOfParsings);
     bool isWellformed() const;
 
@@ -52,8 +54,10 @@ protected:
     /// for instance. It makes sense to be able to read it for efficiency purposes,
     /// but it's too time-intensive (for any application really) to serialize and
     /// then deserialize a list of parsings into XML.
-    QList<Parsing> mParsings;
+    QList<ME::Parsing> mParsings;
 
 };
+
+} // namespace KE
 
 #endif // ABSTRACTPARSEDFORM_H

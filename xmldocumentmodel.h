@@ -9,6 +9,8 @@
 #include <QStringList>
 #include <QXmlStreamReader>
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT XmlDocumentModel : public XmlDocumentModelLevel
 {
 public:
@@ -33,5 +35,7 @@ private:
     QString mLabel;
     XmlDocumentModelLevel mRoot;
 };
+
+} // namespace KE
 
 #endif // XMLDOCUMENTMODEL_H

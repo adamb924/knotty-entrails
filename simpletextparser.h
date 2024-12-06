@@ -5,17 +5,21 @@
 
 #include "abstracttextparser.h"
 
+namespace KE {
+
 class ParserLog;
 
 class KNOTTYENTRAILS_EXPORT SimpleTextParser : public AbstractTextParser
 {
 public:
-    explicit SimpleTextParser(const Morphology *morphology);
+    explicit SimpleTextParser(const ME::Morphology *morphology);
 
     void parseText( AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const override;
 
 private:
-    const Morphology * mMorphology;
+    const ME::Morphology * mMorphology;
 };
+
+} // namespace KE
 
 #endif // SIMPLETEXTPARSER_H

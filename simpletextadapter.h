@@ -9,14 +9,20 @@
 
 class QDomElement;
 class QDomDocument;
-class DomTextSegment;
+
+namespace ME {
 class Morphology;
+}
+
+namespace KE {
+
+class DomTextSegment;
 
 class KNOTTYENTRAILS_EXPORT SimpleTextAdapter : public AbstractTextAdapter
 {
 public:
-    SimpleTextAdapter(const QString & filename, const Morphology * morphology);
-    SimpleTextAdapter(QDomElement element, const Morphology * morphology);
+    SimpleTextAdapter(const QString & filename, const ME::Morphology * morphology);
+    SimpleTextAdapter(QDomElement element, const ME::Morphology * morphology);
     ~SimpleTextAdapter() override;
 
     int count() const override;
@@ -32,5 +38,7 @@ private:
     QString mFilename;
     DomTextSegment * mTheTextSegment;
 };
+
+} // namespace KE
 
 #endif // SIMPLETEXTADAPTER_H

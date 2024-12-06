@@ -9,6 +9,8 @@
 
 #include "xmldocumentposition.h"
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT XmlDocumentModelLevel
 {
 public:
@@ -63,5 +65,7 @@ private:
     QList<XmlDocumentModelLevel> mModelChildren;
     QString mLabelFrom;
 };
+
+} // namespace KE
 
 #endif // XMLDOCUMENTMODELLEVEL_H

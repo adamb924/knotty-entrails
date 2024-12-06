@@ -2,6 +2,8 @@
 
 #include "morphology.h"
 
+using namespace KE;
+
 QString DomParsedForm::XML_ID = "id";
 QString DomParsedForm::XML_LANG = "lang";
 QString DomParsedForm::XML_FORM = "form";
@@ -12,7 +14,7 @@ QString DomParsedForm::XML_PARSING_IDENTIFIER = "parsing-identifier";
 QString DomParsedForm::XML_SOURCE = "source";
 QString DomParsedForm::XML_GLOSSARY = "glossary";
 
-DomParsedForm::DomParsedForm(const QDomElement &textItem, const Morphology *morphology) : mParsedFormElement(textItem), mMorphology(morphology)
+DomParsedForm::DomParsedForm(const QDomElement &textItem, const ME::Morphology *morphology) : mParsedFormElement(textItem), mMorphology(morphology)
 {
     QDomNodeList outputList = textItem.elementsByTagName(XML_FORM);
     if( outputList.count() > 0 )
@@ -28,19 +30,19 @@ DomParsedForm::~DomParsedForm()
 
 }
 
-Form DomParsedForm::form() const
+ME::Form DomParsedForm::form() const
 {
     bool ok;
     qlonglong id = mFormElement.attribute(XML_ID).toLongLong(&ok);
     if( !ok )
         id = -1; /// this is the default null value
 
-    WritingSystem ws = mMorphology->writingSystem( mFormElement.attribute(XML_LANG) );
+    ME::WritingSystem ws = mMorphology->writingSystem( mFormElement.attribute(XML_LANG) );
 
-    return Form( ws, mFormElement.text(), id );
+    return ME::Form( ws, mFormElement.text(), id );
 }
 
-void DomParsedForm::setForm(const Form &form)
+void DomParsedForm::setForm(const ME::Form &form)
 {
     ensureElementExists( mFormElement, XML_FORM );
     Q_ASSERT( !mFormElement.isNull() );
@@ -90,7 +92,7 @@ void DomParsedForm::setSource(const QString &source)
     mParsedFormElement.setAttribute(XML_SOURCE, source );
 }
 
-Parsing DomParsedForm::parsing()
+ME::Parsing DomParsedForm::parsing()
 {
     Q_ASSERT(mMorphology != nullptr);
 
@@ -99,7 +101,7 @@ Parsing DomParsedForm::parsing()
         QDomNodeList parseList = mParsedFormElement.elementsByTagName(XML_PARSING);
         if( parseList.count() > 0 )
         {
-            const Parsing p = Parsing::readFromXml( parseList.at(0).toElement(), mMorphology);
+            const ME::Parsing p = ME::Parsing::readFromXml( parseList.at(0).toElement(), mMorphology);
             if( p.isNull() )
             {
                 mParsedFormElement.removeChild( parseList.at(0) );
@@ -108,7 +110,7 @@ Parsing DomParsedForm::parsing()
         }
         else
         {
-            return Parsing();
+            return ME::Parsing();
         }
     }
     else
@@ -117,7 +119,7 @@ Parsing DomParsedForm::parsing()
     }
 }
 
-void DomParsedForm::setParsing(const Parsing &p)
+void DomParsedForm::setParsing(const ME::Parsing &p)
 {
     mCachedParsing = p;
 

@@ -3,26 +3,30 @@
 
 #include "knotty-entrails_global.h"
 
-class AbstractTextSegment;
-class QDomDocument;
-class Form;
-class Morphology;
-class Parsing;
-class WritingSystem;
-class AbstractTextItem;
-
 #include <QObject>
 #include <QString>
 #include <functional>
 
-#include "knotty-entrails_global.h"
+class QDomDocument;
+
+namespace ME {
+class Form;
+class Morphology;
+class Parsing;
+class WritingSystem;
+}
+
+namespace KE {
+
+class AbstractTextSegment;
+class AbstractTextItem;
 
 class KNOTTYENTRAILS_EXPORT AbstractTextAdapter : public QObject
 {
     Q_OBJECT
 
 public:
-    AbstractTextAdapter(const Morphology * morphology = nullptr);
+    AbstractTextAdapter(const ME::Morphology * morphology = nullptr);
     virtual ~AbstractTextAdapter();
 
     ///! \brief Returns the number of translatable lines in a text
@@ -41,11 +45,13 @@ public:
     void dumpToDebug() const;
 
 signals:
-    void formChanged( const Form & oldForm, const Form & newForm );
+    void formChanged( const ME::Form & oldForm, const ME::Form & newForm );
 
 protected:
     QDomDocument * mDomDocument;
-    const Morphology * mMorphology;
+    const ME::Morphology * mMorphology;
 };
+
+} // namespace KE
 
 #endif // ABSTRACTTEXTADAPTER_H

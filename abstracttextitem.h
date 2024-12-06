@@ -7,8 +7,14 @@
 
 class QDomDocument;
 class QDomElement;
-class AnnotatedTranslation;
+
+namespace ME {
 class Morphology;
+}
+
+namespace KE {
+
+class AnnotatedTranslation;
 class AbstractParsedForm;
 
 class KNOTTYENTRAILS_EXPORT AbstractTextItem
@@ -48,5 +54,7 @@ public:
     static WellformednessStatus wellformednessStatusFromNumberOfParsings(int numberOfParsings);
     static bool isWellformed(WellformednessStatus status);
 };
+
+} // namespace KE
 
 #endif // ABSTRACTTEXTITEM_H

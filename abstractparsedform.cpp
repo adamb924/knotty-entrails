@@ -5,6 +5,8 @@
 #include <QXmlStreamWriter>
 #include <QDomDocument>
 
+using namespace KE;
+
 AbstractParsedForm::AbstractParsedForm()
 {
 
@@ -15,13 +17,13 @@ AbstractParsedForm::~AbstractParsedForm()
 
 }
 
-void AbstractParsedForm::setForm(const Form &form, const Morphology *morphology)
+void AbstractParsedForm::setForm(const ME::Form &form, const ME::Morphology *morphology)
 {
     Q_ASSERT(morphology != nullptr);
 
     setForm(form);
 
-    const QList<Parsing> ps = morphology->possibleParsings( form );
+    const QList<ME::Parsing> ps = morphology->possibleParsings( form );
     setWellformedness( ps.count() );
     if( ps.count() > 0 )
     {
@@ -29,9 +31,9 @@ void AbstractParsedForm::setForm(const Form &form, const Morphology *morphology)
     }
 }
 
-void AbstractParsedForm::setParsing(const Morphology *morphology)
+void AbstractParsedForm::setParsing(const ME::Morphology *morphology)
 {
-    const QList<Parsing> ps = morphology->possibleParsings( form() );
+    const QList<ME::Parsing> ps = morphology->possibleParsings( form() );
     setWellformedness(ps.count());
     if( ! ps.isEmpty() )
     {
@@ -60,7 +62,7 @@ QString AbstractParsedForm::summary()
     return dbgString;
 }
 
-void AbstractParsedForm::setWellformednessFromMorphology(const Morphology *morphology)
+void AbstractParsedForm::setWellformednessFromMorphology(const ME::Morphology *morphology)
 {
     int numberOfParsings = morphology->possibleParsings( form() ).count();
     setWellformedness(numberOfParsings);

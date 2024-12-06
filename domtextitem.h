@@ -8,10 +8,12 @@
 
 #include <QDomElement>
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT DomTextItem : public AbstractTextItem
 {
 public:
-    DomTextItem(const QDomElement & textItem, const Morphology * morphology);
+    DomTextItem(const QDomElement & textItem, const ME::Morphology * morphology);
     ~DomTextItem() override;
 
     Type type() const override;
@@ -39,10 +41,12 @@ private:
     void ensureElementExists(QDomElement &element, const QString & elementName);
 
     QDomElement mTextItemElement;
-    const Morphology * mMorphology;
-    Parsing mCachedParsing;
+    const ME::Morphology * mMorphology;
+    ME::Parsing mCachedParsing;
     DomParsedForm * mInput;
     DomParsedForm * mOutput;
 };
+
+} // namespace KE
 
 #endif // DOMTEXTITEM_H

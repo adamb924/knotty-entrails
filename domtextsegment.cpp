@@ -2,7 +2,9 @@
 
 #include "textitem.h"
 
-DomTextSegment::DomTextSegment(QDomDocument *document, const Morphology *morphology) : mDocument(document), mMorphology(morphology)
+using namespace KE;
+
+DomTextSegment::DomTextSegment(QDomDocument *document, const ME::Morphology *morphology) : mDocument(document), mMorphology(morphology)
 {
     Q_ASSERT(mMorphology != nullptr);
 

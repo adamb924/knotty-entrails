@@ -4,10 +4,12 @@
 
 #include "textitem.h"
 
+using namespace KE;
+
 QRegularExpression DocumentTokenizer::WHITESPACE_RE("^\\s+$", QRegularExpression::UseUnicodePropertiesOption);
 QRegularExpression DocumentTokenizer::NONWORD_RE("\\b", QRegularExpression::UseUnicodePropertiesOption);
 
-DocumentTokenizer::DocumentTokenizer(const XmlDocumentModel &documentModel, const WritingSystem &inputWritingSystem, const WritingSystem &outputWritingSystem, TextItem::Type mode, const QStringList &nonbreakingSequences)
+DocumentTokenizer::DocumentTokenizer(const XmlDocumentModel &documentModel, const ME::WritingSystem &inputWritingSystem, const ME::WritingSystem &outputWritingSystem, TextItem::Type mode, const QStringList &nonbreakingSequences)
     : mDocumentModel(documentModel),
       mInputWritingSystem(inputWritingSystem),
       mOutputWritingSystem(outputWritingSystem),
@@ -72,7 +74,7 @@ void DocumentTokenizer::writeTokens(const QString &string, QXmlStreamWriter &out
             if( mTextMode == TextItem::Translated )
             {
                 /// also add it to the database
-                Form form(mInputWritingSystem, token);
+                ME::Form form(mInputWritingSystem, token);
 
                 TextItem item( TextItem::Translated );
                 item.input().setForm(form);
@@ -82,7 +84,7 @@ void DocumentTokenizer::writeTokens(const QString &string, QXmlStreamWriter &out
             else if( mTextMode == TextItem::Simple )
             {
                 /// also add it to the database
-                Form form(mOutputWritingSystem, token);
+                ME::Form form(mOutputWritingSystem, token);
 
                 TextItem item( form );
                 item.output().setGlossaryKey(glossary);

@@ -2,16 +2,18 @@
 
 #include "morphology.h"
 
+using namespace KE;
+
 ParsedForm::ParsedForm() : mWellFormedness(AbstractTextItem::Untested)
 {
 
 }
 
-ParsedForm::ParsedForm(const Form &form) : mForm(form), mWellFormedness(AbstractTextItem::Untested)
+ParsedForm::ParsedForm(const ME::Form &form) : mForm(form), mWellFormedness(AbstractTextItem::Untested)
 {
 }
 
-ParsedForm::ParsedForm(const Parsing &parsing) : mForm(parsing.form()), mWellFormedness(AbstractTextItem::Untested)
+ParsedForm::ParsedForm(const ME::Parsing &parsing) : mForm(parsing.form()), mWellFormedness(AbstractTextItem::Untested)
 {
     /// setParsing does a lot of other things
     ParsedForm::setParsing( parsing );
@@ -22,12 +24,12 @@ ParsedForm::~ParsedForm()
 
 }
 
-Form ParsedForm::form() const
+ME::Form ParsedForm::form() const
 {
     return mForm;
 }
 
-void ParsedForm::setForm(const Form &form)
+void ParsedForm::setForm(const ME::Form &form)
 {
     mForm = form;
 }
@@ -62,12 +64,12 @@ void ParsedForm::setSource(const QString &source)
     mSource = source;
 }
 
-Parsing ParsedForm::parsing()
+ME::Parsing ParsedForm::parsing()
 {
     return mSelectedParsing;
 }
 
-void ParsedForm::setParsing(const Parsing &p)
+void ParsedForm::setParsing(const ME::Parsing &p)
 {
     mSelectedParsing = p;
     if( ! p.isNull() )

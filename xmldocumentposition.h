@@ -5,6 +5,8 @@
 
 #include <QDomElement>
 
+namespace KE {
+
 class XmlDocumentModelLevel;
 
 class KNOTTYENTRAILS_EXPORT XmlDocumentPosition
@@ -24,5 +26,7 @@ private:
     const XmlDocumentModelLevel * mLevel;
     QDomElement mNode;
 };
+
+} // namespace KE
 
 #endif // XMLDOCUMENTPOSITION_H

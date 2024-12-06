@@ -6,16 +6,17 @@
 #include <QString>
 
 class QXmlStreamWriter;
-class SoundAndFury;
 
 #include "datatypes/writingsystem.h"
 #include "textitem.h"
 #include "xmldocumentmodel.h"
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT DocumentTokenizer
 {
 public:
-    DocumentTokenizer(const XmlDocumentModel & documentModel, const WritingSystem & inputWritingSystem, const WritingSystem & outputWritingSystem, TextItem::Type mode, const QStringList & nonbreakingSequences);
+    DocumentTokenizer(const XmlDocumentModel & documentModel, const ME::WritingSystem & inputWritingSystem, const ME::WritingSystem & outputWritingSystem, TextItem::Type mode, const QStringList & nonbreakingSequences);
 
     QString tokenizeFile(const QString & path,  const QString & suffix = QString(".tokenized") ) const;
 
@@ -30,10 +31,12 @@ private:
     static QRegularExpression NONWORD_RE;
 
     XmlDocumentModel mDocumentModel;
-    WritingSystem mInputWritingSystem;
-    WritingSystem mOutputWritingSystem;
+    ME::WritingSystem mInputWritingSystem;
+    ME::WritingSystem mOutputWritingSystem;
     TextItem::Type mTextMode;
     QStringList mNonbreakingSequences;
 };
+
+} // namespace KE
 
 #endif // DOCUMENTTOKENIZER_H

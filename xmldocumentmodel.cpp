@@ -4,6 +4,8 @@
 #include <QtDebug>
 #include <stdexcept>
 
+using namespace KE;
+
 XmlDocumentModel::XmlDocumentModel()
 {
 

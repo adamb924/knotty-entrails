@@ -5,17 +5,21 @@
 
 #include "abstractparserlog.h"
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT SimpleParserLog : public AbstractParserLog
 {
 public:
     SimpleParserLog();
 
-    void addAmbiguousParsing(const QList<Parsing> & parsings) override;
+    void addAmbiguousParsing(const QList<ME::Parsing> & parsings) override;
 
-    void printReport(const WritingSystem & ws) const override;
+    void printReport(const ME::WritingSystem & ws) const override;
 
 private:
-    QSet<QList<Parsing>> mAmbiguousParsings;
+    QSet<QList<ME::Parsing>> mAmbiguousParsings;
 };
+
+} // namespace KE
 
 #endif // SIMPLEPARSERLOG_H

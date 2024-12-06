@@ -5,6 +5,8 @@
 
 #include "textitem.h"
 
+using namespace KE;
+
 AbstractTextSegment::AbstractTextSegment()
 {
 
@@ -48,13 +50,13 @@ int AbstractTextSegment::replace(int from, int numberToRemove, QList<AbstractTex
     return from + withItems.count() - 1;
 }
 
-Form AbstractTextSegment::outputsToForm() const
+ME::Form AbstractTextSegment::outputsToForm() const
 {
     if( count() == 0 )
     {
-        return Form();
+        return ME::Form();
     }
-    Form f( item(0)->output().form().writingSystem(), "" );
+    ME::Form f( item(0)->output().form().writingSystem(), "" );
     for( int i=0; i < count(); i++ )
     {
         f += item(i)->output().form();

@@ -4,6 +4,8 @@
 
 #include "morphology.h"
 
+using namespace KE;
+
 QString DomTextItem::XML_TYPE = "type";
 QString DomTextItem::XML_INPUT = "input";
 QString DomTextItem::XML_OUTPUT = "output";
@@ -11,7 +13,7 @@ QString DomTextItem::XML_MODIFIABLE = "modifiable";
 QString DomTextItem::XML_TRUE = "true";
 QString DomTextItem::XML_FALSE = "false";
 
-DomTextItem::DomTextItem(const QDomElement & textItem, const Morphology *morphology)
+DomTextItem::DomTextItem(const QDomElement & textItem, const ME::Morphology *morphology)
     : mTextItemElement(textItem),
       mMorphology(morphology)
 {

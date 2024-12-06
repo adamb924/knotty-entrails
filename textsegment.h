@@ -6,11 +6,13 @@
 #include "abstracttextsegment.h"
 #include "abstracttextitem.h"
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT TextSegment : public AbstractTextSegment
 {
 public:
     TextSegment();
-    explicit TextSegment(const Form & string);
+    explicit TextSegment(const ME::Form & string);
     ~TextSegment() override;
 
     AbstractTextItem *item(int n) const override;
@@ -24,5 +26,7 @@ private:
 
     QList<AbstractTextItem*> mItems;
 };
+
+} // namespace KE
 
 #endif // TEXTSEGMENT_H

@@ -8,6 +8,8 @@
 #include "abstractparsedform.h"
 #include "morphology.h"
 
+using namespace KE;
+
 AbstractTextItem::AbstractTextItem()
 {
 }

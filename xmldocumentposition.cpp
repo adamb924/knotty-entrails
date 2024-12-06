@@ -2,6 +2,8 @@
 
 #include "xmldocumentmodellevel.h"
 
+using namespace KE;
+
 XmlDocumentPosition::XmlDocumentPosition(const XmlDocumentModelLevel * level, QDomElement node)
     : mLevel(level),mNode(node)
 {

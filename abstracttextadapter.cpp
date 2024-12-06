@@ -11,7 +11,9 @@
 #include "abstracttextsegment.h"
 #include "abstractparsedform.h"
 
-AbstractTextAdapter::AbstractTextAdapter(const Morphology *morphology) : mDomDocument(nullptr), mMorphology(morphology)
+using namespace KE;
+
+AbstractTextAdapter::AbstractTextAdapter(const ME::Morphology *morphology) : mDomDocument(nullptr), mMorphology(morphology)
 {
 
 }

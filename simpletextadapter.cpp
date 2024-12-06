@@ -9,7 +9,9 @@
 #include "domtextsegment.h"
 #include "domtextitem.h"
 
-SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const Morphology *morphology) : AbstractTextAdapter(morphology), mFilename(filename)
+using namespace KE;
+
+SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morphology *morphology) : AbstractTextAdapter(morphology), mFilename(filename)
 {
     Q_ASSERT(mMorphology != nullptr);
     QFile file(filename);
@@ -46,7 +48,7 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const Morphology *
     }
 }
 
-SimpleTextAdapter::SimpleTextAdapter(QDomElement element, const Morphology *morphology) : AbstractTextAdapter(morphology)
+SimpleTextAdapter::SimpleTextAdapter(QDomElement element, const ME::Morphology *morphology) : AbstractTextAdapter(morphology)
 {
     mDomDocument = new QDomDocument( element.ownerDocument() );
     mTheTextSegment = new DomTextSegment(mDomDocument, mMorphology);

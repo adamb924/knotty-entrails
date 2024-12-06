@@ -4,12 +4,14 @@
 
 #include <QRegularExpression>
 
+using namespace KE;
+
 TextSegment::TextSegment()
 {
 
 }
 
-TextSegment::TextSegment(const Form &string)
+TextSegment::TextSegment(const ME::Form &string)
 {
     QStringList strings = string.text().split(QRegularExpression("\\b", QRegularExpression::UseUnicodePropertiesOption), Qt::SkipEmptyParts );
     QStringList tokens;
@@ -32,7 +34,7 @@ TextSegment::TextSegment(const Form &string)
     foreach(QString s, tokens)
     {
         TextItem * item = new TextItem( AbstractTextItem::Translated );
-        item->input().setForm( Form( string.writingSystem(), s ) );
+        item->input().setForm( ME::Form( string.writingSystem(), s ) );
         addItem( item );
     }
 }

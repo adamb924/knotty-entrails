@@ -7,6 +7,8 @@
 
 #include "datatypes/form.h"
 
+namespace KE {
+
 class AbstractTextItem;
 
 class KNOTTYENTRAILS_EXPORT AbstractTextSegment
@@ -23,7 +25,7 @@ public:
 
     int replace(int from, int numberToRemove, QList<AbstractTextItem*> withItems);
 
-    Form outputsToForm() const;
+    ME::Form outputsToForm() const;
 
     QString summary() const;
 
@@ -32,5 +34,7 @@ public:
 private:
     virtual void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) = 0;
 };
+
+} // namespace KE
 
 #endif // ABSTRACTTEXTSEGMENT_H

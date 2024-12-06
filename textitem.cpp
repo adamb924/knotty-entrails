@@ -2,12 +2,14 @@
 
 #include <QXmlStreamWriter>
 
+using namespace KE;
+
 TextItem::TextItem(AbstractTextItem::Type type) : mType(type), mModifiable(true)
 {
 
 }
 
-TextItem::TextItem(const Form &input, Type type) : mOutput(input), mType(type), mModifiable(true)
+TextItem::TextItem(const ME::Form &input, Type type) : mOutput(input), mType(type), mModifiable(true)
 {
 
 }

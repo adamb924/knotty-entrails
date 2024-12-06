@@ -7,14 +7,16 @@
 
 #include <QDomElement>
 
+namespace KE {
+
 class KNOTTYENTRAILS_EXPORT DomParsedForm : public AbstractParsedForm
 {
 public:
-    DomParsedForm(const QDomElement & textItem, const Morphology * morphology);
+    DomParsedForm(const QDomElement & textItem, const ME::Morphology * morphology);
     ~DomParsedForm() override;
 
-    Form form() const override;
-    void setForm(const Form & form) override;
+    ME::Form form() const override;
+    void setForm(const ME::Form & form) override;
 
     AbstractTextItem::WellformednessStatus wellformedness() const override;
     void setWellformedness(AbstractTextItem::WellformednessStatus wellformedness) override;
@@ -25,8 +27,8 @@ public:
     QString source() const override;
     void setSource(const QString & source) override;
 
-    Parsing parsing() override;
-    void setParsing(const Parsing & p) override;
+    ME::Parsing parsing() override;
+    void setParsing(const ME::Parsing & p) override;
 
     QString parsingIdentifier() const override;
 
@@ -48,8 +50,10 @@ private:
     void ensureElementExists(QDomElement &element, const QString & elementName);
 
     QDomElement mParsedFormElement, mFormElement;
-    const Morphology * mMorphology;
-    Parsing mCachedParsing;
+    const ME::Morphology * mMorphology;
+    ME::Parsing mCachedParsing;
 };
+
+} // namespace KE
 
 #endif // DOMPARSEDFORM_H
