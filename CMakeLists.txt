@@ -10,8 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_DEBUG_POSTFIX d)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Sql Xml)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Sql Xml)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Sql Xml)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Sql Xml)
 
 add_library(knotty-entrails SHARED
     abstractparsedform.cpp 
@@ -44,14 +44,11 @@ message(STATUS "MORTALENGINE_LIB_DEBUG = ${MORTALENGINE_LIB_DEBUG}")
 
 target_include_directories(knotty-entrails
     PUBLIC
-    ${CMAKE_SOURCE_DIR}/rude-mechanicals
-    ${CMAKE_SOURCE_DIR}/rude-mechanicals/tagform
     ${CMAKE_PREFIX_PATH}/include/mortal-engine
 )
 
 target_link_libraries(knotty-entrails PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Sql
     Qt${QT_VERSION_MAJOR}::Xml
     $<$<CONFIG:Debug>:${MORTALENGINE_LIB_DEBUG}>
@@ -66,7 +63,7 @@ install(TARGETS knotty-entrails
 )
 
 # this installs some non-public headers, but so be it
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/knotty-entrails"
+install(DIRECTORY "${CMAKE_SOURCE_DIR}"
         DESTINATION ${CMAKE_INSTALL_PREFIX}/include
         FILES_MATCHING
         PATTERN "*.h"
