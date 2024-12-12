@@ -2,3 +2,4 @@
 knotty-entrails.pro.user
 knotty-entrails-cppcheck-build-dir/*
 /build
+*.user
