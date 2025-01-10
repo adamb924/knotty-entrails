@@ -44,7 +44,7 @@ message(STATUS "MORTALENGINE_LIB_DEBUG = ${MORTALENGINE_LIB_DEBUG}")
 
 target_include_directories(knotty-entrails
     PUBLIC
-    ${CMAKE_PREFIX_PATH}/include/mortal-engine
+    ${CMAKE_INSTALL_PREFIX}/include/mortal-engine
 )
 
 target_link_libraries(knotty-entrails PRIVATE
