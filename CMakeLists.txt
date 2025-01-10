@@ -45,7 +45,11 @@ message(STATUS "MORTALENGINE_LIB_DEBUG = ${MORTALENGINE_LIB_DEBUG}")
 target_include_directories(knotty-entrails
     PUBLIC
     ${CMAKE_INSTALL_PREFIX}/include/mortal-engine
+    ${EXTRA_INCLUDE_DIR}
 )
+
+get_target_property(INCLUDE_DIRS knotty-entrails INCLUDE_DIRECTORIES)
+message(STATUS "Include directories for knotty-entrails: ${INCLUDE_DIRS}")
 
 target_link_libraries(knotty-entrails PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
