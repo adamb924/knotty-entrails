@@ -14,6 +14,25 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Xml)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Xml)
 
 add_library(knotty-entrails SHARED
+    abstractparsedform.h
+    abstractparserlog.h
+    abstracttextadapter.h
+    abstracttextitem.h
+    abstracttextparser.h
+    abstracttextsegment.h
+    documenttokenizer.h
+    domparsedform.h
+    domtextitem.h
+    domtextsegment.h
+    parsedform.h
+    simpleparserlog.h
+    simpletextadapter.h
+    simpletextparser.h
+    textitem.h
+    textsegment.h
+    xmldocumentmodel.h
+    xmldocumentmodellevel.h
+    xmldocumentposition.h
     abstractparsedform.cpp 
     abstractparserlog.cpp 
     abstracttextadapter.cpp 
