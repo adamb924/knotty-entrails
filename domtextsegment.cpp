@@ -1,13 +1,9 @@
 #include "domtextsegment.h"
 
-#include "textitem.h"
-
 using namespace KE;
 
-DomTextSegment::DomTextSegment(QDomDocument *document, const ME::Morphology *morphology) : mDocument(document), mMorphology(morphology)
+DomTextSegment::DomTextSegment(QDomDocument *document) : mDocument(document)
 {
-    Q_ASSERT(mMorphology != nullptr);
-
 }
 
 DomTextSegment::~DomTextSegment()
@@ -30,7 +26,7 @@ void DomTextSegment::addItem(AbstractTextItem *item)
     mTextItems << dynamic_cast<DomTextItem*>(item);
 }
 
-void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement)
+void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement, const ME::Morphology *morphology)
 {
     /// 3. remove all of the nodes from the segment except the first
     for(int i=startingPosition+numberToRemove-1; i > startingPosition; i--)
@@ -87,7 +83,7 @@ void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QLi
         for(int i=0; i<replacementFragment.childNodes().count(); i++)
         {
             QDomElement element = replacementFragment.childNodes().at(i).toElement();
-            mTextItems.insert( index + i, new DomTextItem(element, mMorphology) );
+            mTextItems.insert( index + i, new DomTextItem(element, morphology) );
         }
 
         QDomNode returnedNode = firstNode.parentNode().replaceChild( replacementFragment, firstNode );

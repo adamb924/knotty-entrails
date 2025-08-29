@@ -22,7 +22,7 @@ public:
     void addItem( AbstractTextItem * item ) override;
 
 private:
-    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) override;
+    void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement, const ME::Morphology *morphology) override;
 
     QList<AbstractTextItem*> mItems;
 };

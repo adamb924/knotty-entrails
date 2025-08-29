@@ -14,8 +14,7 @@ QString DomTextItem::XML_TRUE = "true";
 QString DomTextItem::XML_FALSE = "false";
 
 DomTextItem::DomTextItem(const QDomElement & textItem, const ME::Morphology *morphology)
-    : mTextItemElement(textItem),
-      mMorphology(morphology)
+    : mTextItemElement(textItem)
 {
     QDomElement inputElement, outputElement;
     QDomNodeList outputList = textItem.elementsByTagName(XML_OUTPUT);
@@ -33,8 +32,8 @@ DomTextItem::DomTextItem(const QDomElement & textItem, const ME::Morphology *mor
     ensureElementExists(inputElement, XML_INPUT);
     ensureElementExists(outputElement, XML_OUTPUT);
 
-    mInput = new DomParsedForm( inputElement, mMorphology );
-    mOutput = new DomParsedForm( outputElement, mMorphology );
+    mInput = new DomParsedForm( inputElement, morphology );
+    mOutput = new DomParsedForm( outputElement, morphology );
 }
 
 DomTextItem::~DomTextItem()

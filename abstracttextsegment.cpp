@@ -16,7 +16,7 @@ AbstractTextSegment::~AbstractTextSegment()
 {
 }
 
-int AbstractTextSegment::replace(int from, int numberToRemove, QList<AbstractTextItem *> withItems)
+int AbstractTextSegment::replace(int from, int numberToRemove, QList<AbstractTextItem *> withItems, const ME::Morphology *morphology)
 {
     const int replacementLength = qMax( numberToRemove, withItems.count() );
 
@@ -40,7 +40,7 @@ int AbstractTextSegment::replace(int from, int numberToRemove, QList<AbstractTex
 //        qDebug() << "AbstractTextSegment::replace BEFORE" << item(i)->input().form().summary() << item(i)->output().form().summary();
 //    }
 
-    doReplacement( from, numberToRemove, withItems );
+    doReplacement( from, numberToRemove, withItems, morphology );
 
 //    for(int i=0; i < count(); i++)
 //    {

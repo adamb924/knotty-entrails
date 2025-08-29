@@ -41,7 +41,6 @@ private:
     void ensureElementExists(QDomElement &element, const QString & elementName);
 
     QDomElement mTextItemElement;
-    const ME::Morphology * mMorphology;
     ME::Parsing mCachedParsing;
     DomParsedForm * mInput;
     DomParsedForm * mOutput;
