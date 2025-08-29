@@ -59,10 +59,8 @@ void TextSegment::addItem(AbstractTextItem *item)
     mItems << item;
 }
 
-void TextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement, const ME::Morphology *morphology)
+void TextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement)
 {
-    Q_UNUSED(morphology)
-
     /// remove old items
     for(int i=0; i<numberToRemove; i++)
     {

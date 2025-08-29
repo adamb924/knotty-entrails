@@ -36,7 +36,7 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morpholo
         mDomDocument = new QDomDocument;
         mDomDocument->setContent(&source, &reader);
 
-        mTheTextSegment = new DomTextSegment(mDomDocument);
+        mTheTextSegment = new DomTextSegment(mDomDocument, this);
 
         file.close();
 
@@ -51,7 +51,7 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morpholo
 SimpleTextAdapter::SimpleTextAdapter(QDomElement element, const ME::Morphology *morphology) : AbstractTextAdapter(morphology)
 {
     mDomDocument = new QDomDocument( element.ownerDocument() );
-    mTheTextSegment = new DomTextSegment(mDomDocument);
+    mTheTextSegment = new DomTextSegment(mDomDocument, this);
     loadTextSegmentFromElement( element );
 }
 
@@ -88,6 +88,6 @@ void SimpleTextAdapter::loadTextSegmentFromElement(QDomElement element)
     for (int i = 0; i < outputList.count(); i++)
     {
         QDomElement output = outputList.at(i).toElement();
-        mTheTextSegment->addItem( new DomTextItem( output, mMorphology ) );
+        mTheTextSegment->addItem( new DomTextItem( output, this ) );
     }
 }

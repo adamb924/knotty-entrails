@@ -2,7 +2,7 @@
 
 using namespace KE;
 
-DomTextSegment::DomTextSegment(QDomDocument *document) : mDocument(document)
+DomTextSegment::DomTextSegment(QDomDocument *document, const AbstractTextAdapter * adapter) : mDocument(document), mTextAdapter(adapter)
 {
 }
 
@@ -26,7 +26,7 @@ void DomTextSegment::addItem(AbstractTextItem *item)
     mTextItems << dynamic_cast<DomTextItem*>(item);
 }
 
-void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement, const ME::Morphology *morphology)
+void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem *> replacement)
 {
     /// 3. remove all of the nodes from the segment except the first
     for(int i=startingPosition+numberToRemove-1; i > startingPosition; i--)
@@ -83,7 +83,7 @@ void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QLi
         for(int i=0; i<replacementFragment.childNodes().count(); i++)
         {
             QDomElement element = replacementFragment.childNodes().at(i).toElement();
-            mTextItems.insert( index + i, new DomTextItem(element, morphology) );
+            mTextItems.insert( index + i, new DomTextItem(element, mTextAdapter) );
         }
 
         QDomNode returnedNode = firstNode.parentNode().replaceChild( replacementFragment, firstNode );

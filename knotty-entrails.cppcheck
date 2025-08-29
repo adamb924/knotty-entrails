@@ -9,4 +9,7 @@
     <paths>
         <dir name="."/>
     </paths>
+    <libraries>
+        <library>qt</library>
+    </libraries>
 </project>

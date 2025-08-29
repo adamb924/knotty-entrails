@@ -7,16 +7,16 @@
 
 using namespace KE;
 
-SimpleTextParser::SimpleTextParser(const ME::Morphology *morphology) : mMorphology(morphology)
+SimpleTextParser::SimpleTextParser()
 {
 
 }
 
-void SimpleTextParser::parseText(AbstractTextAdapter *text, WhichForm which, AbstractParserLog *log) const
+void SimpleTextParser::parseText(const ME::Morphology *morphology, AbstractTextAdapter *text, WhichForm which, AbstractParserLog *log) const
 {
-    text->foreachTextItem( [this,which,log](AbstractTextItem * item) {
+    text->foreachTextItem( [this,which,log,morphology](AbstractTextItem * item) {
         /// get possible parsings
-        QList<ME::Parsing> ps = mMorphology->possibleParsings( mNormalizationFunction( (*(item).*which)().form() ) );
+        QList<ME::Parsing> ps = morphology->possibleParsings( mNormalizationFunction( (*(item).*which)().form() ) );
         /// set the wellformedness
         (*(item).*which)().setWellformedness( ps.count() );
         /// if a parsing is available, use it

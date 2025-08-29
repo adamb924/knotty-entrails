@@ -27,7 +27,7 @@ class KNOTTYENTRAILS_EXPORT AbstractTextAdapter : public QObject
 
 public:
     AbstractTextAdapter(const ME::Morphology * morphology = nullptr);
-    virtual ~AbstractTextAdapter();
+    virtual ~AbstractTextAdapter() override;
 
     ///! \brief Returns the number of translatable lines in a text
     virtual int count() const = 0;
@@ -43,6 +43,11 @@ public:
     void foreachTextItem(std::function<void(AbstractTextItem*)> funct);
 
     void dumpToDebug() const;
+
+    const ME::Morphology *morphology() const;
+
+public slots:
+    void setMorphology(const ME::Morphology * morphology);
 
 signals:
     void formChanged( const ME::Form & oldForm, const ME::Form & newForm );

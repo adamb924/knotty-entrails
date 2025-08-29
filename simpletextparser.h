@@ -12,12 +12,9 @@ class ParserLog;
 class KNOTTYENTRAILS_EXPORT SimpleTextParser : public AbstractTextParser
 {
 public:
-    explicit SimpleTextParser(const ME::Morphology *morphology);
+    explicit SimpleTextParser();
 
-    void parseText( AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const override;
-
-private:
-    const ME::Morphology * mMorphology;
+    void parseText(const ME::Morphology *morphology, AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const override;
 };
 
 } // namespace KE

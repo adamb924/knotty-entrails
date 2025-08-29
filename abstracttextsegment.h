@@ -23,7 +23,7 @@ public:
 
     virtual void addItem( AbstractTextItem * item ) = 0;
 
-    int replace(int from, int numberToRemove, QList<AbstractTextItem*> withItems, const ME::Morphology *morphology);
+    int replace(int from, int numberToRemove, QList<AbstractTextItem*> withItems);
 
     ME::Form outputsToForm() const;
 
@@ -32,7 +32,7 @@ public:
     void foreachTextItem(std::function<void(AbstractTextItem*)> funct);
 
 private:
-    virtual void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement, const ME::Morphology *morphology) = 0;
+    virtual void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) = 0;
 };
 
 } // namespace KE

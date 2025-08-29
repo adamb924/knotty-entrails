@@ -9,10 +9,12 @@
 
 namespace KE {
 
+class AbstractTextAdapter;
+
 class KNOTTYENTRAILS_EXPORT DomParsedForm : public AbstractParsedForm
 {
 public:
-    DomParsedForm(const QDomElement & textItem, const ME::Morphology * morphology);
+    DomParsedForm(const QDomElement & textItem, const AbstractTextAdapter *adapter);
     ~DomParsedForm() override;
 
     ME::Form form() const override;
@@ -49,8 +51,8 @@ protected:
 private:
     void ensureElementExists(QDomElement &element, const QString & elementName);
 
+    const AbstractTextAdapter * mTextAdapter;
     QDomElement mParsedFormElement, mFormElement;
-    const ME::Morphology * mMorphology;
     ME::Parsing mCachedParsing;
 };
 

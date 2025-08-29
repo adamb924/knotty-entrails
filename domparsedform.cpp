@@ -1,6 +1,7 @@
 #include "domparsedform.h"
 
 #include "morphology.h"
+#include "abstracttextadapter.h"
 
 using namespace KE;
 
@@ -14,7 +15,7 @@ QString DomParsedForm::XML_PARSING_IDENTIFIER = "parsing-identifier";
 QString DomParsedForm::XML_SOURCE = "source";
 QString DomParsedForm::XML_GLOSSARY = "glossary";
 
-DomParsedForm::DomParsedForm(const QDomElement &textItem, const ME::Morphology *morphology) : mParsedFormElement(textItem), mMorphology(morphology)
+DomParsedForm::DomParsedForm(const QDomElement &textItem, const AbstractTextAdapter *adapter) : mTextAdapter(adapter), mParsedFormElement(textItem)
 {
     QDomNodeList outputList = textItem.elementsByTagName(XML_FORM);
     if( outputList.count() > 0 )
@@ -37,7 +38,7 @@ ME::Form DomParsedForm::form() const
     if( !ok )
         id = -1; /// this is the default null value
 
-    ME::WritingSystem ws = mMorphology->writingSystem( mFormElement.attribute(XML_LANG) );
+    ME::WritingSystem ws = mTextAdapter->morphology()->writingSystem( mFormElement.attribute(XML_LANG) );
 
     return ME::Form( ws, mFormElement.text(), id );
 }
@@ -94,14 +95,14 @@ void DomParsedForm::setSource(const QString &source)
 
 ME::Parsing DomParsedForm::parsing()
 {
-    Q_ASSERT(mMorphology != nullptr);
+    Q_ASSERT(mTextAdapter->morphology() != nullptr);
 
     if( mCachedParsing.isNull() )
     {
         QDomNodeList parseList = mParsedFormElement.elementsByTagName(XML_PARSING);
         if( parseList.count() > 0 )
         {
-            const ME::Parsing p = ME::Parsing::readFromXml( parseList.at(0).toElement(), mMorphology);
+            const ME::Parsing p = ME::Parsing::readFromXml( parseList.at(0).toElement(), mTextAdapter->morphology());
             if( p.isNull() )
             {
                 mParsedFormElement.removeChild( parseList.at(0) );

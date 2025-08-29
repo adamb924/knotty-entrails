@@ -18,7 +18,7 @@ public:
     AbstractTextParser(std::function<ME::Form(ME::Form)> normalizationFunction);
     virtual ~AbstractTextParser();
 
-    virtual void parseText( AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const = 0;
+    virtual void parseText(const ME::Morphology *morphology, AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const = 0;
 
 protected:
     std::function<ME::Form(ME::Form)> mNormalizationFunction;

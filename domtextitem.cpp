@@ -13,7 +13,7 @@ QString DomTextItem::XML_MODIFIABLE = "modifiable";
 QString DomTextItem::XML_TRUE = "true";
 QString DomTextItem::XML_FALSE = "false";
 
-DomTextItem::DomTextItem(const QDomElement & textItem, const ME::Morphology *morphology)
+DomTextItem::DomTextItem(const QDomElement & textItem, const AbstractTextAdapter *adapter)
     : mTextItemElement(textItem)
 {
     QDomElement inputElement, outputElement;
@@ -32,8 +32,8 @@ DomTextItem::DomTextItem(const QDomElement & textItem, const ME::Morphology *mor
     ensureElementExists(inputElement, XML_INPUT);
     ensureElementExists(outputElement, XML_OUTPUT);
 
-    mInput = new DomParsedForm( inputElement, morphology );
-    mOutput = new DomParsedForm( outputElement, morphology );
+    mInput = new DomParsedForm( inputElement, adapter );
+    mOutput = new DomParsedForm( outputElement, adapter );
 }
 
 DomTextItem::~DomTextItem()

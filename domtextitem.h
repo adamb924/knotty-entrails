@@ -10,10 +10,12 @@
 
 namespace KE {
 
+class AbstractTextAdapter;
+
 class KNOTTYENTRAILS_EXPORT DomTextItem : public AbstractTextItem
 {
 public:
-    DomTextItem(const QDomElement & textItem, const ME::Morphology * morphology);
+    DomTextItem(const QDomElement & textItem, const AbstractTextAdapter * adapter);
     ~DomTextItem() override;
 
     Type type() const override;

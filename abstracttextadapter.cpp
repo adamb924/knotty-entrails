@@ -63,6 +63,16 @@ void AbstractTextAdapter::dumpToDebug() const
     }
 }
 
+void AbstractTextAdapter::setMorphology(const ME::Morphology *morphology)
+{
+    mMorphology = morphology;
+}
+
+const ME::Morphology *AbstractTextAdapter::morphology() const
+{
+    return mMorphology;
+}
+
 void AbstractTextAdapter::foreachTextItem(std::function<void(AbstractTextItem*)> funct)
 {
     for(int i=0; i<count(); i++)
