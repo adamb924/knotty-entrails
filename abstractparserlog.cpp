@@ -16,7 +16,7 @@ void AbstractParserLog::printList(const QString &label, const QSet<QList<ME::Par
 {
     if( list.count() > 0 )
     {
-        qInfo().noquote() << QObject::tr("-----%1 (%2)-----").arg(label).arg( list.count() );
+        printHeader(label, list.count());
         QSetIterator<QList<ME::Parsing> > i(list);
         while(i.hasNext())
         {
@@ -27,4 +27,22 @@ void AbstractParserLog::printList(const QString &label, const QSet<QList<ME::Par
             }
         }
     }
+}
+
+void AbstractParserLog::printList(const QString &label, const QList<ME::Form> &list) const
+{
+    if( list.count() > 0 )
+    {
+        printHeader(label, list.count());
+        QListIterator<ME::Form> i(list);
+        while(i.hasNext())
+        {
+            qInfo().noquote() << i.next().text();
+        }
+    }
+}
+
+void AbstractParserLog::printHeader(const QString &label, int number) const
+{
+    qInfo().noquote() << QObject::tr("-----%1 (%2)-----").arg(label).arg( number );
 }
