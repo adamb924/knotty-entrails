@@ -1,5 +1,7 @@
 #include "simpleparserlog.h"
 
+#include <QObject>
+
 using namespace KE;
 
 SimpleParserLog::SimpleParserLog()
