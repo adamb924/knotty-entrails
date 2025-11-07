@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QtDebug>
-#include <QRegularExpression>
 
 #include "morphology.h"
 #include "abstracttextitem.h"
