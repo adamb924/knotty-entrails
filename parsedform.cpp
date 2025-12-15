@@ -1,7 +1,5 @@
 #include "parsedform.h"
 
-#include "morphology.h"
-
 using namespace KE;
 
 ParsedForm::ParsedForm() : mWellFormedness(AbstractTextItem::Untested)
