@@ -12,7 +12,6 @@ class KNOTTYENTRAILS_EXPORT ParsedForm : public AbstractParsedForm
 public:
     ParsedForm();
     explicit ParsedForm(const ME::Form & form);
-    explicit ParsedForm(const ME::Parsing & parsing);
     ~ParsedForm() override;
 
     ME::Form form() const override;

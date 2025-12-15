@@ -12,8 +12,9 @@ class KNOTTYENTRAILS_EXPORT TextSegment : public AbstractTextSegment
 {
 public:
     TextSegment();
-    explicit TextSegment(const ME::Form & string);
     ~TextSegment() override;
+
+    void addItemsFromForm(const ME::Form &string);
 
     AbstractTextItem *item(int n) const override;
 

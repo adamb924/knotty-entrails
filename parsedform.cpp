@@ -13,12 +13,6 @@ ParsedForm::ParsedForm(const ME::Form &form) : mForm(form), mWellFormedness(Abst
 {
 }
 
-ParsedForm::ParsedForm(const ME::Parsing &parsing) : mForm(parsing.form()), mWellFormedness(AbstractTextItem::Untested)
-{
-    /// setParsing does a lot of other things
-    ParsedForm::setParsing( parsing );
-}
-
 ParsedForm::~ParsedForm()
 {
 
