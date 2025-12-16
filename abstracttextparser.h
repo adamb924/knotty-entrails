@@ -15,13 +15,9 @@ class KNOTTYENTRAILS_EXPORT AbstractTextParser
 {
 public:
     AbstractTextParser();
-    AbstractTextParser(std::function<ME::Form(ME::Form)> normalizationFunction);
     virtual ~AbstractTextParser();
 
     virtual void parseText(const ME::Morphology *morphology, AbstractTextAdapter * text, WhichForm which, AbstractParserLog * log = nullptr) const = 0;
-
-protected:
-    std::function<ME::Form(ME::Form)> mNormalizationFunction;
 };
 
 } // namespace KE

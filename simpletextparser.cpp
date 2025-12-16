@@ -16,7 +16,7 @@ void SimpleTextParser::parseText(const ME::Morphology *morphology, AbstractTextA
 {
     text->foreachTextItem( [this,which,log,morphology](AbstractTextItem * item) {
         /// get possible parsings
-        QList<ME::Parsing> ps = morphology->possibleParsings( mNormalizationFunction( (*(item).*which)().form() ) );
+        QList<ME::Parsing> ps = morphology->possibleParsings((*(item).*which)().form());
         /// set the wellformedness
         (*(item).*which)().setWellformedness( ps.count() );
         /// if a parsing is available, use it
