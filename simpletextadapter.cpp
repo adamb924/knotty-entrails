@@ -17,7 +17,7 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morpholo
     {
         QXmlStreamReader xml(&file);
         mDomDocument = new QDomDocument;
-        mDomDocument->setContent(&xml);
+        mDomDocument->setContent(&xml, QDomDocument::ParseOption::PreserveSpacingOnlyNodes);
 
         mTheTextSegment = new DomTextSegment(mDomDocument, this);
 
