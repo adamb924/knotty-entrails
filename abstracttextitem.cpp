@@ -6,7 +6,6 @@
 #include <QDomElement>
 
 #include "abstractparsedform.h"
-#include "morphology.h"
 
 using namespace KE;
 
@@ -39,7 +38,7 @@ void AbstractTextItem::serialize(QXmlStreamWriter &out)
     out.writeAttribute( "type", AbstractTextItem::typeToString( type() ) );
     out.writeAttribute( "modifiable", modifiable() ? "true" : "false" );
     output().serialize("output", out);
-    if( type() == AbstractTextItem::Translated )
+    if (type() == AbstractTextItem::Translated)
         input().serialize("input", out);
     out.writeEndElement(); /// text-item
 }
