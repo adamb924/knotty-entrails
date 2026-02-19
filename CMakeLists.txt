@@ -20,7 +20,6 @@ add_library(knotty-entrails SHARED
     abstracttextitem.h
     abstracttextparser.h
     abstracttextsegment.h
-    documenttokenizer.h
     domparsedform.h
     domtextitem.h
     domtextsegment.h
@@ -30,16 +29,12 @@ add_library(knotty-entrails SHARED
     simpletextparser.h
     textitem.h
     textsegment.h
-    xmldocumentmodel.h
-    xmldocumentmodellevel.h
-    xmldocumentposition.h
     abstractparsedform.cpp 
     abstractparserlog.cpp 
     abstracttextadapter.cpp 
     abstracttextitem.cpp 
     abstracttextparser.cpp 
     abstracttextsegment.cpp 
-    documenttokenizer.cpp 
     domparsedform.cpp 
     domtextitem.cpp 
     domtextsegment.cpp 
@@ -48,10 +43,9 @@ add_library(knotty-entrails SHARED
     simpletextadapter.cpp 
     simpletextparser.cpp 
     textitem.cpp 
-    textsegment.cpp 
-    xmldocumentmodel.cpp 
-    xmldocumentmodellevel.cpp 
-    xmldocumentposition.cpp
+    textsegment.cpp
+    tokenizer.h tokenizer.cpp
+    documentmodel.h documentmodel.cpp
 )
 
 # Use generator expressions to add the "d" suffix in Debug mode
