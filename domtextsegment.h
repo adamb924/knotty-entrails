@@ -11,7 +11,7 @@ namespace KE {
 class KNOTTYENTRAILS_EXPORT DomTextSegment : public AbstractTextSegment
 {
 public:
-    DomTextSegment(QDomDocument *document, const AbstractTextAdapter *adapter);
+    DomTextSegment(QDomDocument document, const AbstractTextAdapter *adapter);
     ~DomTextSegment() override;
 
     AbstractTextItem *item(int n) const override;
@@ -23,7 +23,7 @@ public:
 private:
     void doReplacement(int startingPosition, int numberToRemove, QList<AbstractTextItem*> replacement) override;
 
-    QDomDocument *mDocument;
+    QDomDocument mDocument;
     const AbstractTextAdapter *mTextAdapter;
     QList<DomTextItem*> mTextItems;
 };

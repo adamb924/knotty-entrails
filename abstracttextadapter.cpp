@@ -12,18 +12,17 @@
 
 using namespace KE;
 
-AbstractTextAdapter::AbstractTextAdapter(const ME::Morphology *morphology) : mDomDocument(nullptr), mMorphology(morphology)
+AbstractTextAdapter::AbstractTextAdapter(const ME::Morphology *morphology)
+    : mMorphology(morphology)
 {
 
 }
 
 AbstractTextAdapter::~AbstractTextAdapter()
 {
-    if( mDomDocument != nullptr )
-        delete  mDomDocument;
 }
 
-QDomDocument *AbstractTextAdapter::domDocument() const
+QDomDocument AbstractTextAdapter::domDocument() const
 {
     return mDomDocument;
 }
@@ -41,8 +40,8 @@ void AbstractTextAdapter::save(const QString &newFilename) const
             out.setCodec("UTF-8");
         #endif
 
-        out << mDomDocument->toString();
-        file.close();
+            out << mDomDocument.toString();
+            file.close();
     }
     else
     {

@@ -29,7 +29,7 @@ public:
     QString summary();
 
     void serialize(QXmlStreamWriter & out);
-    QDomElement toElement(QDomDocument *document);
+    QDomElement toElement(QDomDocument document);
 
     virtual Type type() const = 0;
 

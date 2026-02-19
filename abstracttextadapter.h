@@ -7,7 +7,9 @@
 #include <QString>
 #include <functional>
 
-class QDomDocument;
+#include <QDomDocument>
+class QDomNode;
+class QDomElement;
 
 namespace ME {
 class Form;
@@ -35,8 +37,7 @@ public:
     virtual AbstractTextSegment *segment(int n) = 0;
     virtual const AbstractTextSegment *segment(int n) const = 0;
 
-    /// TODO this probably doesn't need to be a pointer (e.g., QDomNode::ownerDocument() doesn't need to return a pointer)
-    QDomDocument *domDocument() const;
+    QDomDocument domDocument() const;
 
     void save(const QString & newFilename ) const;
 
@@ -53,7 +54,7 @@ signals:
     void formChanged( const ME::Form & oldForm, const ME::Form & newForm );
 
 protected:
-    QDomDocument * mDomDocument;
+    QDomDocument mDomDocument;
     const ME::Morphology * mMorphology;
 };
 

@@ -2,7 +2,9 @@
 
 using namespace KE;
 
-DomTextSegment::DomTextSegment(QDomDocument *document, const AbstractTextAdapter * adapter) : mDocument(document), mTextAdapter(adapter)
+DomTextSegment::DomTextSegment(QDomDocument document, const AbstractTextAdapter *adapter)
+    : mDocument(document)
+    , mTextAdapter(adapter)
 {
 }
 
@@ -46,7 +48,7 @@ void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QLi
     }
 
     /// 4. Prepare replacement
-    QDomDocumentFragment replacementFragment = mDocument->createDocumentFragment();
+    QDomDocumentFragment replacementFragment = mDocument.createDocumentFragment();
     for(int i=0; i < replacement.count(); i++)
     {
         replacementFragment.appendChild( replacement.at(i)->toElement( mDocument ) );
@@ -54,8 +56,8 @@ void DomTextSegment::doReplacement(int startingPosition, int numberToRemove, QLi
         /// TODO should this be customizable?
         if( (i+1) < replacement.count() ) /// i.e., hasNext()
         {
-            QDomElement whitespace = mDocument->createElement("whitespace");
-            whitespace.appendChild( mDocument->createTextNode(" ") );
+            QDomElement whitespace = mDocument.createElement("whitespace");
+            whitespace.appendChild(mDocument.createTextNode(" "));
             replacementFragment.appendChild( whitespace);
         }
     }

@@ -16,14 +16,13 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morpholo
     if (file.open(QIODevice::ReadOnly))
     {
         QXmlStreamReader xml(&file);
-        mDomDocument = new QDomDocument;
-        mDomDocument->setContent(&xml, QDomDocument::ParseOption::PreserveSpacingOnlyNodes);
+        mDomDocument.setContent(&xml, QDomDocument::ParseOption::PreserveSpacingOnlyNodes);
 
         mTheTextSegment = new DomTextSegment(mDomDocument, this);
 
         file.close();
 
-        loadTextSegmentFromElement( mDomDocument->documentElement() );
+        loadTextSegmentFromElement(mDomDocument.documentElement());
     }
     else
     {
@@ -33,7 +32,7 @@ SimpleTextAdapter::SimpleTextAdapter(const QString &filename, const ME::Morpholo
 
 SimpleTextAdapter::SimpleTextAdapter(QDomElement element, const ME::Morphology *morphology) : AbstractTextAdapter(morphology)
 {
-    mDomDocument = new QDomDocument( element.ownerDocument() );
+    mDomDocument = element.ownerDocument();
     mTheTextSegment = new DomTextSegment(mDomDocument, this);
     loadTextSegmentFromElement( element );
 }

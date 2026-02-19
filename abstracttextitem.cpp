@@ -43,14 +43,14 @@ void AbstractTextItem::serialize(QXmlStreamWriter &out)
     out.writeEndElement(); /// text-item
 }
 
-QDomElement AbstractTextItem::toElement(QDomDocument * document)
+QDomElement AbstractTextItem::toElement(QDomDocument document)
 {
     QString serialized;
     QXmlStreamWriter stream(&serialized);
     serialize(stream);
     QDomDocument xmlDoc;
     xmlDoc.setContent(serialized);
-    return document->importNode( xmlDoc.firstChild().toElement(), true ).toElement();
+    return document.importNode(xmlDoc.firstChild().toElement(), true).toElement();
 }
 
 QString AbstractTextItem::typeToString(AbstractTextItem::Type type)
