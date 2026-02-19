@@ -47,6 +47,10 @@ public:
 
     const ME::Morphology *morphology() const;
 
+    static void elementsByTagName(const QDomNode &parentNode,
+                                  const QStringList &tagNames,
+                                  QList<QDomElement> &result);
+
 public slots:
     void setMorphology(const ME::Morphology * morphology);
 

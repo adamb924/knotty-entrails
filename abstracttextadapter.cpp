@@ -71,6 +71,24 @@ const ME::Morphology *AbstractTextAdapter::morphology() const
     return mMorphology;
 }
 
+void AbstractTextAdapter::elementsByTagName(const QDomNode &parentNode,
+                                            const QStringList &tagNames,
+                                            QList<QDomElement> &result)
+{
+    QDomNodeList children = parentNode.childNodes();
+
+    for (int i = 0; i < children.count(); ++i) {
+        QDomNode node = children.at(i);
+
+        if (node.isElement()) {
+            QDomElement element = node.toElement();
+            if (tagNames.contains(element.tagName()))
+                result.append(element);
+            elementsByTagName(element, tagNames, result);
+        }
+    }
+}
+
 void AbstractTextAdapter::foreachTextItem(std::function<void(AbstractTextItem*)> funct)
 {
     for(int i=0; i<count(); i++)
