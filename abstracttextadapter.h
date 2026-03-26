@@ -51,6 +51,8 @@ public:
                                   const QStringList &tagNames,
                                   QList<QDomElement> &result);
 
+    void serialize(const QString &filename) const;
+
 public slots:
     void setMorphology(const ME::Morphology * morphology);
 
