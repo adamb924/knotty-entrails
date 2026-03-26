@@ -5,10 +5,11 @@
 #include <QTextStream>
 #include <QtDebug>
 
-#include "morphology.h"
+#include "abstractparsedform.h"
 #include "abstracttextitem.h"
 #include "abstracttextsegment.h"
-#include "abstractparsedform.h"
+#include "domtextitem.h"
+#include "morphology.h"
 
 using namespace KE;
 
@@ -111,5 +112,30 @@ void AbstractTextAdapter::serialize(const QString &filename) const
         file.close();
     } else {
         qCritical() << "Could not open for reading: " << filename;
+    }
+}
+
+void AbstractTextAdapter::reduceTextItemsTo(WhichForm which)
+{
+    QList<QDomElement> textItems;
+    elementsByTagName(mDomDocument, {"text-item"}, textItems);
+    /// reduce the text-item elements to the given input/output
+    foreach (auto &textItem, textItems) {
+        DomTextItem item(textItem, this);
+        QDomText replacementText = mDomDocument.createTextNode((item.*which)().form().text());
+        QDomNode parent = textItem.parentNode();
+        if (!parent.isNull()) {
+            parent.replaceChild(replacementText, textItem);
+        }
+    }
+    /// replace whitespace elements with the actual whitespace
+    QList<QDomElement> whitespaces;
+    elementsByTagName(mDomDocument, {"whitespace"}, whitespaces);
+    foreach (auto &whitespace, whitespaces) {
+        QDomText replacementText = mDomDocument.createTextNode(whitespace.text());
+        QDomNode parent = whitespace.parentNode();
+        if (!parent.isNull()) {
+            parent.replaceChild(replacementText, whitespace);
+        }
     }
 }

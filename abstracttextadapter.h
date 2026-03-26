@@ -1,6 +1,7 @@
 #ifndef ABSTRACTTEXTADAPTER_H
 #define ABSTRACTTEXTADAPTER_H
 
+#include "abstractparsedform.h"
 #include "knotty-entrails_global.h"
 
 #include <QObject>
@@ -22,6 +23,8 @@ namespace KE {
 
 class AbstractTextSegment;
 class AbstractTextItem;
+
+typedef AbstractParsedForm &(AbstractTextItem::*WhichForm)();
 
 class KNOTTYENTRAILS_EXPORT AbstractTextAdapter : public QObject
 {
@@ -52,6 +55,8 @@ public:
                                   QList<QDomElement> &result);
 
     void serialize(const QString &filename) const;
+
+    void reduceTextItemsTo(WhichForm which);
 
 public slots:
     void setMorphology(const ME::Morphology * morphology);
